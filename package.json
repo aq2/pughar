@@ -1,0 +1,22 @@
+{
+  "name": "pughar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aq2/pughar.git"
+  },
+  "author": "angelo",
+  "license": "WTF",
+  "bugs": {
+    "url": "https://github.com/aq2/pughar/issues"
+  },
+  "homepage": "https://github.com/aq2/pughar#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}

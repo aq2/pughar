@@ -1,0 +1,207 @@
+body {
+	color: black;
+	font-family: 'Source Sans Pro', Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+h1 {
+	font-family: Lustria, Georgia, serif;
+	color: white;
+	font-size: 2em;
+	font-weight: normal;
+	transform:scale(1,2); 
+    -webkit-transform:scale(1,2); 
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.tab { 
+	font-family: 'Lustria', Georgia, serif;
+ 	font-size: 1em; // alert!
+ 	letter-spacing: 1px;
+}
+
+h2 {
+	font-size: 1.75em;
+	margin: 0.5em 0;
+	color: black;	
+	font-weight: bold;
+}
+
+h4 {
+	//font-family: 'Quando', Georgia, serif;
+	font-size: 1.25em;
+	margin: 0.75em 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+p {
+	margin-bottom: 1em;
+	font-size: 1.1em;
+}
+
+li {
+	font-size: 1.1em;
+}
+
+table {
+	color: black;	
+	text-align: center;
+	
+	a:visited, a:link {
+		color: $mustard;
+		text-decoration: none;
+	}
+}
+
+th {
+	font-family: 'Lustria', Georgia, serif;
+	text-transform: uppercase;
+	font-size: 1.25em;
+	text-align: center;
+	font-weight: normal;
+	letter-spacing: 1px;
+	}
+
+	td {
+		font-size: 1.25em;
+	}
+
+#apply_navbar {
+  background: $navbar;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1em;
+  overflow: hidden;
+  font-family: Georgia, serif;
+  font-size: 1.25em;
+  color: black;
+  letter-spacing: 1px;
+  padding-top: 12px;
+  height: 2em;  
+}
+
+#apply_navbar:hover {
+    background-color: $navhover;
+    color: black;
+}
+
+
+.apply a:hover {
+	color: white;
+}
+.email a:link, a:visited {
+	color: black;
+}
+
+.email a:hover {
+	color: $mustard;
+}
+
+.norm {
+	font-size: 0.9em;
+	font-weight: normal;
+}
+
+
+#thanks {
+	color: white;
+	text-align: center;
+}
+
+#thanks > h2 {
+	color: white;
+	//padding: 1em;
+}
+
+#thanks a {
+	color: $brown;
+}
+
+#thanks a:hover {
+	color: $mustard;
+}
+
+
+.transfer {
+	text-align: center;
+
+	h2 {
+		color: #fff;
+	}
+}
+
+
+@media screen and (max-width: 750px) {
+	.tab {
+		letter-spacing: 0;
+		font-size: 0.85em;
+		//color: blue;
+	}
+}
+
+
+@media screen and (max-width: 550px) {
+
+	h1 {
+		font-size:1.2em;
+	}
+
+	h3 {
+		letter-spacing: 1px;
+		font-weight: normal;
+	}
+}
+
+@media screen and (max-width: 495px) {
+	h1 {
+		font-size: 1em;
+	}
+}
+
+
+.testimonial blockquote {
+	margin: 10px 10px 0;
+	background: $lightMustard;
+	padding: 20px 60px;
+	position: relative;
+	border: none;
+	border-radius: 8px;
+	font-style: italic;
+}
+
+.testimonial blockquote:before, .testimonial blockquote:after {
+	content: "\201C";
+	position: absolute;
+	font-size: 80px;
+	line-height: 1;
+	color: #fff;
+	font-style: normal;
+}
+
+.testimonial blockquote:before {
+	top: 0;
+	left: 10px;
+}
+
+.testimonial blockquote:after {
+	content: "\201D";
+	right: 10px;
+	bottom: -.5em;
+}
+
+.testimonial div {
+	width: 0;
+	height: 0;
+	border-left: 0 solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 20px solid $lightMustard;
+	margin: 0 0 0 60px;
+}
+
+.testimonial p {
+	margin: 8px 0 0 20px;
+	text-align: left;
+}

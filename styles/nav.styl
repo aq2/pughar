@@ -1,0 +1,90 @@
+#navbar {
+  width: 100%;
+  display: table; 
+  margin: 0 auto 0 auto;   // space between header?
+  width: auto;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    float: left;
+    cursor: pointer;
+    line-height: 2.5em;
+    overflow: hidden;
+    position: relative;
+    display: table-cell; 
+    padding: 0px 6px;
+    border-right: 1px solid $brown;
+  }
+
+  li.active {
+    background-color: $content;
+    color: $navactive;
+    border-bottom: 2px solid #fff;
+    display: block;
+  }
+
+  li:hover {
+    background-color: $navhover;
+    color: black;
+  }
+
+  li:last-child {
+    border: 0;
+  }
+}
+
+.accordion_heading { display: none; }
+
+
+@media screen and (max-width: 650px) {
+  #navbar li {
+    padding: 0 2px;
+    //color: blue;  
+  }
+}
+
+
+@media screen and (max-width: 550px) {
+	
+  #navbar {
+		display: none;
+	}
+	
+  .accordion_heading {
+    width: 100%;
+		background-color: $mustard;
+		color: $accText;
+		border-top: 2px solid $brown;
+		margin: 0;
+		padding: 8px 20px;
+		display: block;
+		cursor: pointer;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+    font-size: 1.25em;
+    font-family:  Georgia, serif;
+	}
+	
+  .d_active {
+		background-color: $brown;
+		color: #fff;
+	}
+
+  .accordion_heading:hover {
+    background: $acchover;
+    color: $accTextHover;
+  }
+
+  .last_acc {
+    border-bottom: 2px solid $brown;
+  }
+
+}
