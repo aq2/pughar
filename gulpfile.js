@@ -3,69 +3,63 @@ var pug  = require('gulp-pug')
 var stylus = require('gulp-stylus')
 var rename = require('gulp-rename')
 var sourcemaps = require('gulp-sourcemaps')
-
-
-var pugSrc = 'src/index.pug'
-var pugWatch = 'src/pages/**/*.pug'
-var pugDest = './dist/'
-
-var stylusSrc = 'src/stylus/main.styl'
-var stylusWatch = 'src/stylus/**/*.styl'
-var stylusDest = './dist/css/'
-
-var codeWatch = 'src/code/**/*.*'
-var codeDest = './dist/code'
-
-var imagesWatch = './src/images/**/*.*'
-var imagesDest = './dist/images'
-
-
+var browserSync = require('browser-sync').create()
 
 
 gulp.task('stylus', done => {
-  gulp.src( stylusSrc )
-      .pipe( sourcemaps.init())
-      .pipe( stylus({
+  gulp.src('src/stylus/main.styl')
+      .pipe(sourcemaps.init())
+      .pipe(stylus({
         compress: true,
         errorLogToConsole: true,
       }))
-      .on( 'error', console.error.bind(console))
-      .pipe( rename( { suffix: '.min' }))
-      .pipe( sourcemaps.write( './') )
-      .pipe( gulp.dest( stylusDest ))
+      .on('error', console.error.bind(console))
+      .pipe(rename({ suffix: '.min' }))
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest('./dist/css'))
+      .pipe(browserSync.stream())
   done()
 })
 
 
 gulp.task('pug', done => {
-  gulp.src( pugSrc )
-      .pipe( pug())
-      .pipe( gulp.dest( pugDest ))
+  gulp.src('src/index.pug')
+      .pipe(pug())
+      .pipe(gulp.dest('./dist/'))
+      .pipe(browserSync.stream())
   done()
 })
 
 
 gulp.task('code', done => {
-  gulp.src( codeWatch)
-      .pipe( gulp.dest( codeDest))
+  gulp.src('./src/code/**/*.*')
+      .pipe(gulp.dest( './dist/code'))
   done()
 })
 
 
 gulp.task('images', done => {
-  gulp.src( imagesWatch)
-      .pipe( gulp.dest( imagesDest ))
+  gulp.src('./src/images/**/*.*')
+      .pipe(gulp.dest( './dist/images'))
   done()
 })
 
 
-
-gulp.task('default', gulp.series([ 'stylus', 'pug', 'code', 'images']))
-
-gulp.task('watch', gulp.parallel( 'default', done => {
-  gulp.watch( stylusWatch, gulp.series( 'stylus'))
-  gulp.watch( codeWatch, gulp.series( 'code'))
-  gulp.watch( pugWatch, gulp.series( 'pug'))
-  gulp.watch( imagesSrc, gulp.series( 'images'))
+gulp.task('browser-sync', done => {
+  browserSync.init({
+    server: {
+      baseDir: './dist',
+      injectChanges: true
+    }
+  })
   done()
-}))
+})
+
+
+gulp.task('watch', gulp.parallel('browser-sync', 'stylus', done => {
+  gulp.watch('src/stylus/*.styl', gulp.series('stylus'));
+  gulp.watch('src/**/*.pug', gulp.series('pug'));
+  done();
+}));
+
+
