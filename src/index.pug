@@ -3,15 +3,13 @@ html
   head
     meta(charset='utf-8')
     title Ayurvedic Yoga Massage in Devon
-    meta(name='description', content='Ayurvedic Yoga Massge and Workshops in Devon')
     meta(name='viewport', content='width=device-width, user-scalable=no')
+    meta(name='description', content='Ayurvedic Yoga Massage and Workshops in Devon')
 
-    link(rel="stylesheet" href="css/gallery.css")
-    link(rel='stylesheet', href='css/main.css')
+    link(rel='stylesheet', href='css/main.min.css')
     link(rel='stylesheet', type='text/css', href='http://fonts.googleapis.com/css?family=Lustria|Source+Sans+Pro')
 
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
-    script(src='js/mobile.js')
 
   // favicon? TODO
 
@@ -26,13 +24,13 @@ html
       div(id='tab-container')
         div(id='navbar')
           ul(class='tabs')
-            li(class='tab active' rel='welcome') &nbsp;Welcome&nbsp;
-            li(class='tab' rel='treatments') &nbsp;Treatments&nbsp;
-            li(class='tab' rel='training') &nbsp;Training&nbsp;
-            li(class='tab' rel='yoga') &nbsp;Yoga Classes&nbsp;
-            li(class='tab' rel='gallery') &nbsp;Gallery&nbsp;
-            li(class='tab' rel='about') &nbsp;About Me&nbsp;
-            li(class='tab' rel='contact') &nbsp;Contact&nbsp;
+            li(class='tab active' rel='welcome') Welcome
+            li(class='tab' rel='treatments') Treatments
+            li(class='tab' rel='training') Training
+            li(class='tab' rel='yoga') Yoga Classes
+            li(class='tab' rel='gallery') Gallery
+            li(class='tab' rel='about') About Me
+            li(class='tab' rel='contact') Contact
 
         div(id='content' style='float: clear;')
           include pages/welcome.pug
@@ -44,19 +42,6 @@ html
           include pages/contact.pug
 
       // end container
-      script(src='js/tabs.js')
+      script(src='code/tabs.js')
 
-      // The Gallery as lightbox dialog, should be a child element of the document body
-      div(id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls")
-        div(class="slides")
-        a(class="prev") ‹
-        a(class="next") ›
-        a(class="close") X
-        a(class="play-pause")
-        ol(class="indicator")
-
-      script(src='js/gallery.min.js')
-      script(src='js/moargallery.js')
-
-      script(src='js/main.js')
 
