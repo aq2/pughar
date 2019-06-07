@@ -16,7 +16,7 @@ gulp.task('stylus', done => {
       .on('error', console.error.bind(console))
       .pipe(rename({ suffix: '.min' }))
       .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest('./dist/css'))
+      .pipe(gulp.dest('./www/css'))
       .pipe(browserSync.stream())
   done()
 })
@@ -25,7 +25,7 @@ gulp.task('stylus', done => {
 gulp.task('pug', done => {
   gulp.src('src/index.pug')
       .pipe(pug())
-      .pipe(gulp.dest('./dist/'))
+      .pipe(gulp.dest('./www/'))
       .pipe(browserSync.stream())
   done()
 })
@@ -33,14 +33,14 @@ gulp.task('pug', done => {
 
 gulp.task('code', done => {
   gulp.src('./src/code/**/*.*')
-      .pipe(gulp.dest( './dist/code'))
+      .pipe(gulp.dest('./www/code'))
   done()
 })
 
 
 gulp.task('images', done => {
   gulp.src('./src/images/**/*.*')
-      .pipe(gulp.dest( './dist/images'))
+      .pipe(gulp.dest('./www/images'))
   done()
 })
 
@@ -48,7 +48,7 @@ gulp.task('images', done => {
 gulp.task('browser-sync', done => {
   browserSync.init({
     server: {
-      baseDir: './dist',
+      baseDir: './www',
       injectChanges: true
     }
   })
@@ -57,9 +57,9 @@ gulp.task('browser-sync', done => {
 
 
 gulp.task('watch', gulp.parallel('browser-sync', 'stylus', done => {
-  gulp.watch('src/stylus/*.styl', gulp.series('stylus'));
-  gulp.watch('src/**/*.pug', gulp.series('pug'));
-  done();
-}));
+  gulp.watch('src/stylus/*.styl', gulp.series('stylus'))
+  gulp.watch('src/**/*.pug', gulp.series('pug'))
+  done()
+}))
 
 
