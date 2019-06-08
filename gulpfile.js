@@ -39,14 +39,14 @@ exports.pages = pages
 
 
 function code() {
-  gulp.src('./src/code/**/*.*')
+  return gulp.src('./src/code/**/*.*')
       .pipe(gulp.dest('./www/code'))
 }
 exports.code = code
 
 
 function images() {
-  gulp.src('./src/images/**/*.*')
+  return gulp.src('./src/images/**/*.*')
       .pipe(gulp.dest('./www/images'))
 }
 exports.images = images
