@@ -1,65 +1,70 @@
-var gulp = require('gulp')
-var pug  = require('gulp-pug')
-var stylus = require('gulp-stylus')
-var rename = require('gulp-rename')
-var sourcemaps = require('gulp-sourcemaps')
-var browserSync = require('browser-sync').create()
+const gulp = require('gulp'),
+      pug  = require('gulp-pug'),
+      stylus = require('gulp-stylus'),
+      rename = require('gulp-rename'),
+      notify = require('gulp-notify'),    // install libnotify-bin
+      sourcemaps = require('gulp-sourcemaps'),
+      errorHandler = require('gulp-error-handle'),
+      browserSync = require('browser-sync').create()
 
 
-gulp.task('stylus', done => {
-  gulp.src('src/stylus/main.styl')
-      .pipe(sourcemaps.init())
-      .pipe(stylus({
-        compress: true,
-        errorLogToConsole: true,
-      }))
-      .on('error', console.error.bind(console))
-      .pipe(rename({ suffix: '.min' }))
-      .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest('./www/css'))
-      .pipe(browserSync.stream())
-  done()
-})
+const logError = function(err) {
+  notify.onError({
+    title: 'Gulp error ' + err.plugin,
+    message: err.toString()
+  })(err)
+}
 
 
-gulp.task('pug', done => {
-  gulp.src('src/index.pug')
-      .pipe(pug())
-      .pipe(gulp.dest('./www/'))
-      .pipe(browserSync.stream())
-  done()
-})
+function style() {
+  return gulp.src('./src/stylus/**/*.styl')
+            .pipe(errorHandler(logError))
+            .pipe(sourcemaps.init())
+            .pipe(stylus({ compress: true }))
+            .pipe(rename({ suffix: '.min' }))
+            .pipe(sourcemaps.write('./'))
+            .pipe(gulp.dest('./www/css'))
+            .pipe(browserSync.stream())
+}
+exports.style = style
 
 
-gulp.task('code', done => {
+function pages() {
+  return gulp.src('./src/**/*.pug')
+            .pipe(pug())
+            .pipe(gulp.dest('./www/'))
+            .pipe(browserSync.stream())
+}
+exports.pages = pages
+
+
+function code() {
   gulp.src('./src/code/**/*.*')
       .pipe(gulp.dest('./www/code'))
-  done()
-})
+}
+exports.code = code
 
 
-gulp.task('images', done => {
+function images() {
   gulp.src('./src/images/**/*.*')
       .pipe(gulp.dest('./www/images'))
-  done()
-})
+}
+exports.images = images
 
 
-gulp.task('browser-sync', done => {
+function watch() {
   browserSync.init({
     server: {
-      baseDir: './www',
-      injectChanges: true
+      baseDir: './www'
     }
   })
-  done()
-})
+  gulp.watch('./src/**/*.pug', pages)
+  gulp.watch('./src/code/**/*.*', code)
+  gulp.watch('./src/images/**/*.*', images)
+  gulp.watch('./src/stylus/**/*.styl', style)
 
-
-gulp.task('watch', gulp.parallel('browser-sync', 'stylus', done => {
-  gulp.watch('src/stylus/*.styl', gulp.series('stylus'))
-  gulp.watch('src/**/*.pug', gulp.series('pug'))
-  done()
-}))
-
+  gulp.src("./src/index.*")
+      .pipe(notify("Gulp up and running 😃 "));
+}
+exports.watch = watch
 
