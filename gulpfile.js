@@ -30,7 +30,7 @@ exports.styles = styles
 
 
 function pages() {
-  return gulp.src('./src/**/*.pug')
+  return gulp.src('./src/**/index.pug')
             .pipe(errorHandler(logError))
             .pipe(pug())
             .pipe(gulp.dest('./www/'))
