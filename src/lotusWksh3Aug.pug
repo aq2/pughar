@@ -13,16 +13,16 @@ html
     script(src='code/jquery.validate.js')
 
   body
-    div(id='container')
+    #container
       header
         img(src='images/header.jpg')
         h1 Ayurvedic Yoga Massage
-    
-      div(id='apply_navbar')
+
+      #apply_navbar
         p.
           a(href=index.html') back to main site
 
-      div(id='info')
+      #info
         h2 Ayurvedic Yoga Massage Workshop
         h4 Saturday 3rd August 2019 10am - 1pm
         iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2525.8342564783893!2d-3.5261599999999653!3d50.723014000000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486da43db07c12b7%3A0x7cc3e5bad826796d!2sLotus+Loft!5e0!3m2!1sen!2suk!4v1422712288800' frameborder='0' class='map')
@@ -32,18 +32,18 @@ html
           &pound;10 non-refundable deposit for client cancellation<br>
           Full refund for instructor cancellation
 
-      div(class='form_wrapper')
-        form(name='wksh' id='wksh' class='wkshp_form' method='post' action='code/generalForm.php')
+      .form_wrapper
+        form#wksh.wkshp_form(name='wksh' method='post' action='code/generalForm.php')
           p.
             To book and pay for a place on this workshop, please fill out the following form, and I'll get back to you as soon as I can.
           fieldset
             p Your details
             div
-              input(type='text' name='name' id='name' placeholder='Your name' autocomplete='off' tabindex='1' class='txtinput' required)
+              input#name(type='text' name='name' placeholder='Your name' autocomplete='off' tabindex=1 class='txtinput' required)
             div
-              input(type='tel' name='tel' id='tel' placeholder='Your phone number' autocomplete='off' tabindex='1' class='txtinput' required)
+              input#tel(type='tel' name='tel' placeholder='Your phone number' autocomplete='off' tabindex=1 class='txtinput' required)
             div
-              input(type='email' name='email' id='email' placeholder='Your email address' autocomplete='off' tabindex='1' class='txtinput' required)
+              input#email(type='email' name='email' placeholder='Your email address' autocomplete='off' tabindex=1 class='txtinput' required)
             div
               select(name='tickets' form='wksh')
                 option(value='deposit') Deposit: &nbsp;&pound;10

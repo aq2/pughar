@@ -1,4 +1,3 @@
-
 window.open = function () {};
 window.print = function () {};
 
@@ -15,7 +14,6 @@ function __bindToLinks() {
     }
   }
 }
-
 
 
 if (document.location.search.match(/type=embed/gi)) {
@@ -40,6 +38,7 @@ $("ul.tabs li").click(function () {
   $(".accordion_heading[rel^='" + activeTab + "']").addClass("d_active");
 
 });
+
 /* if in drawer mode */
 $(".accordion_heading").click(function () {
 

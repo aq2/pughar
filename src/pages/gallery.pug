@@ -1,9 +1,9 @@
-h3(class="accordion_heading" rel="gallery") Gallery
-div(id="gallery" class="tab_content")
+h3.accordion_heading(rel='gallery') Gallery
+#gallery.tab_content
   h2 Ayurvedic Yoga Massage Gallery
-  div(id='gallery')
+  #gallery
 
-    div(class='topRow')
+    .topRow
       a(href='images/gall/gal1.jpg')
         img(src='images/gall/gal1_th.jpg')
       a(href='images/gall/gal2.jpg')
@@ -13,7 +13,7 @@ div(id="gallery" class="tab_content")
       a(href='images/gall/gal4.jpg')
         img(src='images/gall/gal4_th.jpg')
 
-    div(class="middleRow")
+    .middleRow
       a(href='images/gall/gal6.jpg')
         img(src='images/gall/gal6_th.jpg')
       a(href='images/gall/gal7.jpg')
@@ -21,7 +21,7 @@ div(id="gallery" class="tab_content")
       a(href='images/gall/gal8.jpg')
         img(src='images/gall/gal8_th.jpg')
 
-    div(class="bottomRow")
+    .bottomRow
       a(href='images/gall/gal9.jpg')
         img(src='images/gall/gal9_th.jpg')
       a(href='images/gall/gal10.jpg')
@@ -31,13 +31,13 @@ div(id="gallery" class="tab_content")
 
 
 // The Gallery as lightbox dialog, should be a child element of the document body
-div(id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls")
-  div(class="slides")
-  a(class="prev") ‹
-  a(class="next") ›
-  a(class="close") X
-  a(class="play-pause")
-  ol(class="indicator")
+#blueimp-gallery.blueimp-gallery.blueimp-gallery-controls
+  .slides
+  a.prev ‹
+  a.next ›
+  a.close X
+  a.play-pause
+  ol.indicator
 
 script(src='code/gallery.min.js')
 script(src='code/moargallery.js')

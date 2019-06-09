@@ -1,12 +1,10 @@
-h3(class='d_active accordion_heading' rel='welcome') Welcome
+h3.accordion_heading.d_active(rel='welcome') Welcome
 
-div(id='welcome' class='tab_content')
-
+#welcome.tab_content
   include tenhabits.pug
 
-
   h2 What is Ayurvedic Yoga Massage?
-  div(class='left')
+  .left
     p.
       Ayurvedic Yoga Massage has its origins in India and is an ancient healing system
       that uses an effective combination of powerful deep tissue massage with coordinated
@@ -24,10 +22,10 @@ div(id='welcome' class='tab_content')
         muscular/skeletal realignment leading to improved posture, digestion,
         and increased flexibility
 
-  div(class='right')
+  .right
       img(src='images/gall/gal2_th.jpg')
 
-  div(class='testimonial')
+  .testimonial
       blockquote.
           A massage with Saghar is a very special experience. She has an extraordinary
           talent for 'reading' the body and what it needs, and her massage is truly healing
@@ -37,5 +35,5 @@ div(id='welcome' class='tab_content')
 
       // TODO move
       a(href='https://www.facebook.com/saghar.amozgar')
-          img(src='images/facebook_logo.png' height=29 width=50 align=right)
+        img(src='images/facebook_logo.png' height=29 width=50 align=right)
 

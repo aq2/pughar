@@ -1,27 +1,28 @@
-h3(class="accordion_heading last_acc" rel="contact") Contact
+h3.accordion_heading.last_acc(rel='contact') Contact
 
-div(id="contact" class="tab_content")
+#contact.tab_content
   h2 Contact details
-  div(class="left50")
-    form(name="wksh" id="wksh" class="wkshp_form" method="post" action="code/contactForm.php")
+  .left50
+    form#wksh.wkshp_form(name="wksh" method="post" action="code/contactForm.php")
       p Fill out the form to send me a message.<br>I'll reply as soon as I can.
       fieldset
         br
         div
-          input(type='text' name='name' id='name' placeholder='Your name' autocomplete='off' tabindex='1' required)
+          input#name(type='text' name='name' placeholder='Your name' autocomplete='off' tabindex='1' required)
         div
-          input(type="email" name="email" id="email" placeholder='Your email address' autocomplete='off' tabindex='1' required)
+          input#email(type='email' name='email' placeholder='Your email address' autocomplete='off' tabindex='1' required)
         div
-          textarea(id="message" name="message" rows="3" cols="30" placeholder="write me a message..." required)
+          textarea#message(name='message' rows=3 cols=30 placeholder='write me a message...' required)
 
         div
-          input(type="hidden" name="subject" value="Contact form on website")
-          input(type="submit" value="send" name="button")
-  div(class="right50 contact_right")
-    img(src="images/lotus.jpg")
+          input(type='hidden' name='subject' value='Contact form on website')
+          input(type='submit' value='send' name='button')
+
+  .right50.contact_right
+    img(src='images/lotus.jpg')
     p mobile: 07974 470 610
     p Neal's Yard, Exeter: 01392 438127
     p Neal's Yard, Totnes: 01803 868054
-    p(class="email")
-      a(href="mailto:saghar_amozgar@hotmail.com") saghar_amozgar@hotmail.com
+    p.email
+      a(href='mailto:saghar_amozgar@hotmail.com') saghar_amozgar@hotmail.com
 

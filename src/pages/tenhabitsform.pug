@@ -1,4 +1,4 @@
-form(name="wksh" id="wksh" class="wkshp_form" method="post" action="code/tenhabitsForm.php")
+form#wksh.wkshp_form(name="wksh" method="post" action="code/tenhabitsForm.php")
   p.
     Please fill out the form if you are interested in attending one of our free talks.
     All replies will be treated with upmost privacy.  Thank you.
@@ -6,13 +6,11 @@ form(name="wksh" id="wksh" class="wkshp_form" method="post" action="code/tenhabi
   fieldset
     br
     div
-      input(type='text' name='name' id='name' placeholder='Your name' autocomplete='off' tabindex='1' required)
+      input#name(type='text' name='name' placeholder='Your name' autocomplete='off' tabindex=1 required)
     div
-      input(type="email" name="email" id="email" placeholder='Your email address' autocomplete='off' tabindex='1' required)
+      input#email(type='email' name='email' placeholder='Your email address' autocomplete='off' tabindex=1 required)
     div
-      // input(type='select' name='date' id='date' placeholder='Which talk date?' required)
-      // label(for='date')
-      select(id='date')
+      select#date
         option(value='') Which talk date?
         option(value='29 June, Lotus Loft') 29 June, Lotus Loft
         option(value='3 August, Lotus Loft') 3 August, Lotus Loft
@@ -21,7 +19,7 @@ form(name="wksh" id="wksh" class="wkshp_form" method="post" action="code/tenhabi
         option(value='27 July, derekthedog') 27 July, derekthedog
 
     div
-      textarea(id="message" name="message" rows="3" cols="30" placeholder="What is your single-most important challenge?" required)
+      textarea#message(name="message" rows="3" cols="30" placeholder="What is your single-most important challenge?" required)
 
     div
       input(type="hidden" name="subject" value="Contact form on website")

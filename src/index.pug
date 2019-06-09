@@ -15,24 +15,23 @@ html
 
 
   body
-    div(id='container')
-
+    #container
       header
         img(src='images/header.jpg')
         h1 Ayurvedic Yoga Massage
 
-      div(id='tab-container')
-        div(id='navbar')
-          ul(class='tabs')
-            li(class='tab active' rel='welcome') Welcome
-            li(class='tab' rel='treatments') Treatments
-            li(class='tab' rel='training') Training
-            li(class='tab' rel='yoga') Yoga Classes
-            li(class='tab' rel='gallery') Gallery
-            li(class='tab' rel='about') About Me
-            li(class='tab' rel='contact') Contact
+      #tab-container
+        #navbar
+          ul.tabs
+            li.tab.active(rel='welcome') Welcome
+            li.tab(rel='treatments') Treatments
+            li.tab(rel='training') Training
+            li.tab(rel='yoga') Yoga Classes
+            li.tab(rel='gallery') Gallery
+            li.tab(rel='about') About Me
+            li.tab(rel='contact') Contact
 
-        div(id='content' style='float: clear;')
+        #content
           include pages/welcome.pug
           include pages/treatments.pug
           include pages/training.pug
@@ -41,7 +40,5 @@ html
           include pages/about.pug
           include pages/contact.pug
 
-      // end container
       script(src='code/tabs.js')
-
 
