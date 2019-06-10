@@ -48,15 +48,15 @@ function pages() {
 exports.pages = pages
 
 
-function pugStuff() {
-  return gulp.src([
-              'src/includes/**/*.pug',
-              'src/mixins/*.pug',
-             ])
-            .pipe(errorHandler(logError))
-            .pipe(pug())
-}
-exports.pugStuff = pugStuff
+// function pugStuff() {
+//   return gulp.src([
+//               'src/includes/**/*.pug',
+//               'src/mixins/*.pug',
+//              ])
+//             .pipe(errorHandler(logError))
+//             .pipe(pug())
+// }
+// exports.pugStuff = pugStuff
 
 
 function codes() {
@@ -82,8 +82,9 @@ function watch() {
   gulp.watch('./src/stylus/**/*.styl', styles)
   gulp.watch('./src/index.pug', index).on('change', browserSync.reload)
   gulp.watch('./src/pages/**/*.pug', pages).on('change', browserSync.reload)
-  gulp.watch('./src/mixins/**.pug', pugStuff).on('change', browserSync.reload)
-  gulp.watch('./src/includes/**.pug', pugStuff).on('change', browserSync.reload)
+  gulp.watch('./src/mixins/**.pug', gulp.parallel(index, pages)).on('change', browserSync.reload)
+  gulp.watch('./src/includes/**.pug', gulp.parallel(index, pages)).on('change', browserSync.reload)
+  // gulp.watch('./src/includes/**.pug', pugStuff).on('change', browserSync.reload)
 
   gulp.src('./src/index.*').pipe(notify('👓 Gulp up, running and watching 👓'))
 }
