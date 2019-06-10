@@ -34,7 +34,7 @@ function index() {
   return gulp.src('./src/index.pug')
              .pipe(errorHandler(logError))
              .pipe(pug())
-             .pipe(gulp.dest('./www/'))
+             .pipe(gulp.dest('./www'))
 }
 exports.index = index
 
@@ -48,28 +48,32 @@ function pages() {
 exports.pages = pages
 
 
-// function pugStuff() {
-//   return gulp.src([
-//               'src/includes/**/*.pug',
-//               'src/mixins/*.pug',
-//              ])
-//             .pipe(errorHandler(logError))
-//             .pipe(pug())
-// }
-// exports.pugStuff = pugStuff
-
-
-function codes() {
-  return gulp.src('./src/code/**/*.*')
+function js() {
+  return gulp.src('./src/js/**/*.js')
              .pipe(errorHandler(logError))
-             .pipe(gulp.dest('./www/code'))
+             .pipe(gulp.dest('./www/js'))
 }
-exports.codes = codes
+exports.js = js
+
+function phps() {
+  return gulp.src('./src/php/**/*.php')
+             .pipe(errorHandler(logError))
+             .pipe(gulp.dest('./www/php'))
+}
+exports.phps = phps
+
+function phpPugs() {
+  return gulp.src('src/php/**/*.pug')
+             .pipe(errorHandler(logError))
+             .pipe(rename({ extname: '.php' }))
+             .pipe(gulp.dest('./www/php'))
+}
+exports.phpPugs = phpPugs
 
 
 function images() {
   return gulp.src('./src/images/**/*.*')
-      .pipe(gulp.dest('./www/images'))
+             .pipe(gulp.dest('./www/images'))
 }
 exports.images = images
 
@@ -77,14 +81,17 @@ exports.images = images
 function watch() {
   browserSync.init({ server: './www' })
 
-  gulp.watch('./src/code/**/*.*', codes)
+  gulp.watch('./src/js/**/*.js', js)
+  gulp.watch('./src/php/**/*.php', phps)
+  gulp.watch('./src/php/**/*.pug', phpPugs).on('change', browserSync.reload)
+
   gulp.watch('./src/images/**/*.*', images)
   gulp.watch('./src/stylus/**/*.styl', styles)
+
   gulp.watch('./src/index.pug', index).on('change', browserSync.reload)
   gulp.watch('./src/pages/**/*.pug', pages).on('change', browserSync.reload)
-  gulp.watch('./src/mixins/**.pug', gulp.parallel(index, pages)).on('change', browserSync.reload)
-  gulp.watch('./src/includes/**.pug', gulp.parallel(index, pages)).on('change', browserSync.reload)
-  // gulp.watch('./src/includes/**.pug', pugStuff).on('change', browserSync.reload)
+  gulp.watch('./src/mixins/**/*.pug', gulp.parallel(index, pages)).on('change', browserSync.reload)
+  gulp.watch('./src/includes/**/*.pug', gulp.parallel(index, pages)).on('change', browserSync.reload)
 
   gulp.src('./src/index.*').pipe(notify('👓 Gulp up, running and watching 👓'))
 }
@@ -103,12 +110,16 @@ function gza() {
 }
 exports.gza = gza
 
-gulp.task('default',
-            gulp.series(
-              nuke,
-              gulp.parallel(index, pages, codes, images, styles),
-              gza,
-              watch
-            )
+
+gulp.task(
+  'default',
+    gulp.series(
+      nuke,
+      gulp.parallel(
+        index, pages, js, phps, phpPugs, images, styles
+      ),
+      gza,
+      watch
+    )
 )
 
