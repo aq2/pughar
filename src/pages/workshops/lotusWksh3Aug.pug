@@ -1,26 +1,16 @@
 doctype html
 html
   head
-    meta(charset='utf-8')
-    title Apply Lotus Loft Workshop
-    meta(name='viewport', content='width=device-width, user-scalable=no')
-    meta(name='description', content='Ayurvedic Yoga Massage and Workshops in Devon')
-
-    link(rel='stylesheet', href='css/main.min.css')
-    link(rel='stylesheet', type='text/css', href='http://fonts.googleapis.com/css?family=Lustria|Source+Sans+Pro')
-
-    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
-    script(src='code/jquery.validate.js')
+    // include '../../includes/head.pug'
 
   body
     #container
       header
-        img(src='images/header.jpg')
+        img(src='./../../images/header.jpg')
         h1 Ayurvedic Yoga Massage
 
       #apply_navbar
-        p.
-          a(href=index.html') back to main site
+        a(href='../../index.html') back to main site
 
       #info
         h2 Ayurvedic Yoga Massage Workshop
@@ -48,12 +38,12 @@ html
               select(name='tickets' form='wksh')
                 option(value='deposit') Deposit: &nbsp;&pound;10
                 option(value='single_full') Single ticket: &nbsp;&pound;30
-                option value='single_remainder') Remaining balance: &nbsp;&pound;20
-                option value='couple_full') Double ticket: &nbsp;&pound;50
-                option value='couple_remainder') Remaining balance: &nbsp;&pound;40
+                option(value='single_remainder') Remaining balance: &nbsp;&pound;20
+                option(value='couple_full') Double ticket: &nbsp;&pound;50
+                option(value='couple_remainder') Remaining balance: &nbsp;&pound;40
             div
               input(type='hidden' name='subject' value='Lotus Loft workshop 8 December')
               input(type='submit' value='Continue to PayPal' name='button')
 
-      script(src='code/validate.js')
+      script(src='../../code/validate.js')
 

@@ -29,13 +29,22 @@ function styles() {
 exports.styles = styles
 
 
-function pages() {
+function includes() {
   return gulp.src('./src/**/index.pug')
             .pipe(errorHandler(logError))
             .pipe(pug())
             .pipe(gulp.dest('./www/'))
 }
-exports.pages = pages
+exports.includes = includes
+
+
+function pages() {
+  return gulp.src('./src/pages/**/*.pug')
+            .pipe(errorHandler(logError))
+            .pipe(pug())
+            .pipe(gulp.dest('./www/pages'))
+}
+exports.pages = pages 
 
 
 function codes() {
@@ -58,7 +67,8 @@ function watch() {
   gulp.watch('./src/code/**/*.*', codes)
   gulp.watch('./src/images/**/*.*', images)
   gulp.watch('./src/stylus/**/*.styl', styles)
-  gulp.watch('./src/**/*.pug', pages).on('change', browserSync.reload)
+  gulp.watch('./src/**/*.pug', includes).on('change', browserSync.reload)
+  gulp.watch('./src/pages/**/*.*', pages).on('change', browserSync.reload)
 
   gulp.src('./src/index.*')
       .pipe(notify('Gulp up and running 😃 '));
@@ -74,7 +84,7 @@ function clean() {
 exports.clean = clean
 
 function build(cb) {
-  gulp.series(pages, codes, styles, images)
+  gulp.series(includes, codes, styles, images)
   gulp.src("./www")
     .pipe(notify('gulp building to be born'))
   cb()
