@@ -8,6 +8,7 @@ const del = require('del'),
       errorHandler = require('gulp-error-handle'),
       browserSync = require('browser-sync').create()
 
+
 const logError = (err) => {
   notify.onError({
     title: 'Gulp error ' + err.plugin,
@@ -44,7 +45,7 @@ function pages() {
             .pipe(pug())
             .pipe(gulp.dest('./www/pages'))
 }
-exports.pages = pages 
+exports.pages = pages
 
 
 function codes() {
@@ -70,25 +71,27 @@ function watch() {
   gulp.watch('./src/**/*.pug', includes).on('change', browserSync.reload)
   gulp.watch('./src/pages/**/*.*', pages).on('change', browserSync.reload)
 
-  gulp.src('./src/index.*')
-      .pipe(notify('Gulp up and running 😃 '));
+  gulp.src('./src/index.*').pipe(notify('Gulp up and running 😃 '));
 }
 exports.watch = watch
 
 
-function clean() {
-  gulp.src("./src")
-    .pipe(notify(' gulp nuke and pave'))
+function nuke() {
+  gulp.src("./src").pipe(notify(' gulp nuke and pave'))
   return del('./www/**/*')
 }
-exports.clean = clean
+exports.nuke = nuke
 
-function build(cb) {
-  gulp.series(includes, codes, styles, images)
-  gulp.src("./www")
-    .pipe(notify('gulp building to be born'))
+
+const gza = function (cb) {
+  gulp.src("./www").pipe(notify('gulp building to be born'))
   cb()
 }
-exports.build = build
 
-exports.default = gulp.series(clean, build, watch)
+
+gulp.task('build',
+  gulp.series(nuke, includes,
+    gulp.parallel(pages, codes, images, styles),
+    gza)
+)
+
