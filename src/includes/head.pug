@@ -1,5 +1,10 @@
 // belongs in the head
 
+mixin setCss(cssSrc)
+  link(rel='stylesheet', type='text/css', href=cssSrc)
+
+
+
 meta(charset='utf-8')
 title Ayurvedic Yoga Massage in Devon - #{title}
 meta(name='viewport', content='width=device-width, user-scalable=no')
@@ -12,4 +17,5 @@ script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
 
 // favicon? TODO
 
-
+// - const cssFile = 'css/main.min.css'
++setCss(cssFile)

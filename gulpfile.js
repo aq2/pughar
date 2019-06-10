@@ -40,7 +40,7 @@ exports.includes = includes
 
 
 function pages() {
-  return gulp.src('./src/pages/**/*.pug')
+  return gulp.src('./src/**/*.pug')
             .pipe(errorHandler(logError))
             .pipe(pug())
             .pipe(gulp.dest('./www/pages'))
@@ -68,8 +68,8 @@ function watch() {
   gulp.watch('./src/code/**/*.*', codes)
   gulp.watch('./src/images/**/*.*', images)
   gulp.watch('./src/stylus/**/*.styl', styles)
-  gulp.watch('./src/**/*.pug', includes).on('change', browserSync.reload)
-  gulp.watch('./src/pages/**/*.*', pages).on('change', browserSync.reload)
+  gulp.watch('./src/**/*.pug', pages).on('change', browserSync.reload)
+  // gulp.watch('./src/pages/**/*.*', pages).on('change', browserSync.reload)
 
   gulp.src('./src/index.*').pipe(notify('Gulp up and running 😃 '));
 }
@@ -89,9 +89,5 @@ const gza = function (cb) {
 }
 
 
-gulp.task('build',
-  gulp.series(nuke, includes,
-    gulp.parallel(pages, codes, images, styles),
-    gza)
-)
+gulp.task('build', gulp.series(nuke, includes, gulp.parallel(pages, codes, images, styles), gza))
 
