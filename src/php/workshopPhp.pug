@@ -19,10 +19,9 @@ doctype
           <?php
           // $EmailTo = 'saghar@ayurvedicyogamassage.org.uk';
           $EmailTo = 'mickey.megabyte@gmail.com';
-          $EmailFrom = Trim(stripslashes($_POST['email']));
 
-          $Name = Trim(stripslashes($_POST['name'])); 
-          $Tel = Trim(stripslashes($_POST['tel'])); 
+          $Tel = Trim(stripslashes($_POST['tel']));
+          $Name = Trim(stripslashes($_POST['name']));
           $Email = Trim(stripslashes($_POST['email']));
           $Tickets = Trim(stripslashes($_POST['tickets']));
           $Subject = Trim(stripslashes($_POST['subject']));
@@ -53,39 +52,41 @@ doctype
           $Body .= $Tickets;
           $Body .= "\n";
 
-          // send email 
-          $success = mail($EmailTo, $Subject, $Body, "From: <$EmailFrom>");
+          // send email
+          $success = mail($EmailTo, $Subject, $Body, "From: <$Email>");
 
 
           // angelo's bit
           $blah = "<meta http-equiv='refresh' content='0;url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id='";
 
           if ($success) {
-            switch ($subject) {    
-              
-              
+            switch ($subject) {
+
               case 'Lotus Loft workshop 3rd August':
                 switch ($tickets) {
                   case "single_full":
-                    print $blah . 'mswq5yzvjkhh8' . '>;
+                    print $blah . '3SF2SCKDLUR3A8' . '>;
                     // print "<meta http-equiv='refresh' content='0;url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=mswq5yzvjkhh8'>";
                     // print "<meta http-equiv=\"refresh\" content=\"0;url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=mswq5yzvjkhh8\">";
                     break;
-                  
-                  
-                  
                   case "single_remainder":
-                    print "<meta http-equiv=\"refresh\" content=\"0;url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=mbc3t3kwwnq62\">";
-                    break;
-                  case "deposit":
-                    print "<meta http-equiv=\"refresh\" content=\"0;url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=fhtxbltjjda6g\">";
-                    break;
-                  case "couple_remainder":
-                    print "<meta http-equiv=\"refresh\" content=\"0;url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=urqpa36mjdc4j\">";
+                    print $blah . 'Y6VZXBZ8XQAV8' . '>;
+                    // print "<meta http-equiv=\"refresh\" content=\"0;url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=mbc3t3kwwnq62\">";
                     break;
                   case "couple_full":
-                    print "<meta http-equiv=\"refresh\" content=\"0;url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=84mpj28nr94mq\">";
+                    print $blah . 'BFGZFUY2M447Y' . '>;
+                    // print "<meta http-equiv=\"refresh\" content=\"0;url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=84mpj28nr94mq\">";
                     break;
+                  case "couple_remainder":
+                    print $blah . 'R9QL2XH4E5F5G' . '>;
+                    // print "<meta http-equiv=\"refresh\" content=\"0;url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=urqpa36mjdc4j\">";
+                    break;
+                  case "deposit":
+                    print $blah . 'QA9L8PWDRLWPW' . '>;
+                    // print "<meta http-equiv=\"refresh\" content=\"0;url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=fhtxbltjjda6g\">";
+                    break;
+
+
                 }
                 break;
                 case "lotus loft workshop 8 december":

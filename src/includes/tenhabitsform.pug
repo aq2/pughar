@@ -1,4 +1,4 @@
-form#wksh.wkshp_form(name='wksh' method='post' action='./../php/simpleForm.php')
+form#wksh.wkshp_form(name='wksh' method='post' action='./../php/simpleFormPhp.php')
   p.
     Please fill out the form if you are interested in attending one of our free talks.
     All replies will be treated with upmost privacy.  Thank you.
@@ -7,14 +7,14 @@ form#wksh.wkshp_form(name='wksh' method='post' action='./../php/simpleForm.php')
     br
     div
       input#name(type='text' name='name'
-          placeholder='Your name' autocomplete='off' 
+          placeholder='Your name' autocomplete='off'
           tabindex=1 required)
-            
+
     div
       input#email(type='email' name='email'
           placeholder='Your email address' autocomplete='off'
           tabindex=1 required)
-            
+
     div
       select#date(name='talkDate')
         option(value='') Which talk date?
@@ -25,13 +25,13 @@ form#wksh.wkshp_form(name='wksh' method='post' action='./../php/simpleForm.php')
         option(value='27 July, derekthedog') 27 July, derekthedog
 
     div
-      textarea#message(name='message' 
+      textarea#message(name='message'
           placeholder='What is your single-most important challenge?'
-          rows=3 cols=30 required) 
+          rows=3 cols=30 required)
 
     div
       input(type='hidden' name='subject'
           value='Ten habits form on website')
-      
+
       input(type='submit' value='send' name='button')
 
