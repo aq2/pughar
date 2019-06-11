@@ -29,28 +29,27 @@ mixin workshop(info)
       &pound;10 non-refundable deposit for client cancellation<br>
       Full refund for instructor cancellation
 
-    .form_wrapper
-      form#wksh.wkshp_form(name='wksh' method='post' action='./../../php/workshopPhp.php')
-        p.
-          To book and pay for a place on this workshop, please fill out the following form, and I'll get back to you as soon as I can.
-        fieldset
-          p Your details
-          div
-            input#name(type='text' name='name' placeholder='Your name' autocomplete='off' tabindex=1 class='txtinput' required)
-          div
-            input#tel(type='tel' name='tel' placeholder='Your phone number' autocomplete='off' tabindex=1 class='txtinput' required)
-          div
-            input#email(type='email' name='email' placeholder='Your email address' autocomplete='off' tabindex=1 class='txtinput' required)
-          div
-            select(name='tickets' form='wksh')
-              option(value='deposit') Deposit: &nbsp;&pound;10
-              option(value='single_full') Single ticket: &nbsp;&pound;30
-              option(value='single_remainder') Remaining balance: &nbsp;&pound;20
-              option(value='couple_full') Double ticket: &nbsp;&pound;50
-              option(value='couple_remainder') Remaining balance: &nbsp;&pound;40
-          div
-            input(value=info.phpID type='hidden' name='subject')
-            input(type='submit' value='Continue to PayPal' name='button')
+    form(name='wksh' method='post' action='./../../php/workshopPhp.php')
+      p.
+        To book and pay for a place on this workshop, please fill out the following form, and I'll get back to you as soon as I can.
+      fieldset
+        p Your details
+        div
+          input.name(type='text' name='name' placeholder='Your name' autocomplete='off' required)
+        div
+          input.tel(type='tel' name='tel' placeholder='Your phone number' autocomplete='off' required)
+        div
+          input.email(type='email' name='email' placeholder='Your email address' autocomplete='off' required)
+        div
+          select(name='tickets' form='wksh')
+            option(value='deposit') Deposit: &nbsp;&pound;10
+            option(value='single_full') Single ticket: &nbsp;&pound;30
+            option(value='single_remainder') Remaining balance: &nbsp;&pound;20
+            option(value='couple_full') Double ticket: &nbsp;&pound;50
+            option(value='couple_remainder') Remaining balance: &nbsp;&pound;40
+        div
+          input(value=info.phpID type='hidden' name='subject')
+          input(type='submit' value='Continue to PayPal' name='button')
 
       script(src='./../../code/validate.js')
 
