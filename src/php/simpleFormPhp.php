@@ -9,17 +9,11 @@ $Message = Trim(stripslashes($_POST['message']));
 $Subject = Trim(stripslashes($_POST['subject']));
 
 $HabitsPage = false;
-if (strpos($Subject, 'contact' !== false) {
+if (strpos($Subject, 'contact' !== false)) {
   $HabitsPage = true;
   $Date = Trim(stripslashes($_POST['date']));
 }
 
-// validation - does it do anything???
-// $validationOK = true;
-// if (!$validationOK) {
-//   print "<meta http-equiv=\"refresh\" content=\"0;URL=../error.html\">";
-//   exit;
-// }
 
 // prepare email body text
 $Body = "Name: ";
@@ -46,7 +40,7 @@ $success = mail($EmailTo, $Subject, $Body, "From: <$Email>");
 
 // redirect to success page
 if ($success){
-  print "<meta http-equiv=\"refresh\" content=\"0;URL=../contactthanks.html\">";
+  print "<meta http-equiv='refresh' content='0;URL=../pages/contactthanks.html'>";
 }
 else{
   print "<meta http-equiv=\"refresh\" content=\"0;URL=../error.html\">";

@@ -1,0 +1,17 @@
+doctype html
+html
+
+  head
+    - const cssFile = '../css/main.min.css'
+    include ../includes/head.pug
+    // title Thank you
+
+  body
+    #container
+      img(src='../images/header.jpg')
+      #thanks
+        h2 Your message has been sent!
+        p I will get back to you as soon as I can.
+
+        a(href='../index.html') Back to website
+
