@@ -1,108 +1,85 @@
-html, body, div, span, h1, h2, h3, p, em, img {
-  margin: 0px;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  font-size: 100%;
-  vertical-align: baseline;
-  background: transparent;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
+html, body, div, span, h1, h2, h3, p, em, img
+  margin 0px
+  padding 0
+  border 0
+  outline 0
+  font-size 100%
+  box-sizing border-box
+  background transparent
+  vertical-align baseline
 
 body
   background $bgcolor
   color $contenttext
 
 
-#container {
-  width: 100%;
-  max-width: 980px;
-  margin: 2em auto 2em auto;
-}
-
-header {
-  position: relative;
-}
+#container
+  width 100%
+  max-width 980px
+  margin 2em auto 2em auto
 
 
-#tab-container {
-  background: $navbar;
-}
+header
+  position relative
 
-img
-  border 0
+  img
+    max-width 100%
+    margin 0 auto
+    padding 0
+
+  h1
+    position absolute
+    top 227px
+    left 0px
+    width 100%
+// header
 
 
-h1 {
-  position: absolute;
-  top: 227px;
-  left: 0px;
-  width: 100%;
-}
+#tab-container
+  background $navbar
 
-header img {
-  max-width: 100%;
-  margin: 0 auto;
-  padding:0;
-}
+#content
+  padding 1em 2em
+  clear both
+  width 100%
+  background $content
+  overflow auto
+  border 2px solid $navbar
+  border-top 0px
 
-#content { 
-  padding: 1em 2em;
-  clear: both;
-  width: 100%;
-  background: $content;
-  overflow: auto;  
-  border: 2px solid $navbar;
-  border-top: 0px;
-}
+.tab_content
+  display none
 
-.tab_content {
-  display: none;
-  //background: orange;
-}
+.left
+  width 62%
+  display inline-block
+  vertical-align top
 
-.left {
-  //background: teal;
-  width: 62%;
-  display: inline-block;
-  vertical-align:top;
-}
+.left50
+  width 48%
+  display inline-block
+  vertical-align top
 
-.left50 {
-  //background: teal;
-  width: 48%;
-  display: inline-block;
-  vertical-align:top;
-}
+.right50
+  width 48%
+  display inline-block
+  vertical-align top
+  margin-left 15px
+  text-align left
 
-.right50 {
-  //background: $lightMustard;
-  width: 48%;
-  display: inline-block;
-  vertical-align:top;
-  margin-left: 15px;
-  text-align: left;
-    
-}
+.contact_right
+  text-align center
 
-.contact_right {
-  //used !
-  text-align: center;
-}
+.right
+  width 36%
+  display inline-block
+  vertical-align top
+  text-align center
 
-.right {
-  //background: $lightBrown;
-  width: 36%;
-  display: inline-block;
-  vertical-align: top;
-  text-align: center;
-}
 
-.right p {
-  text-align: left;
-}
+.right p
+  text-align left
+
 
 // .apply {
 //   width: 78%;
@@ -112,111 +89,87 @@ header img {
 //   text-align: left;
 // }
 
-
+#facebook img
+  border 0
+  width 50px
 
 .left img,
 .right img,
-.right50 img {
-  width: 100%;
-  max-width: 200px;
-  margin: 0 auto 10px auto;
-  border: 1px solid $imgBorder;
-}
+.right50 img
+  width 100%
+  max-width 200px
+  margin 0 auto 10px auto
+  border 1px solid $imgBorder
 
-.david {
-  width: 100%;
-  max-width: 200px;
-  //margin: 0 auto 10px auto;
-  //border: 0px solid $imgBorder;
-}
+.wide
+  width 95%
 
-.david2 {
-  width: 100%;
-  max-width: 500px;
-}
+table
+  border-collapse collapse
+  border 2px solid $tablehead
+  border-spacing 0
+  border-bottom 18px solid $tablehead
+  background $tablebg
+  width 85%
+  margin 0 auto 1em auto
 
-table {
-  border-collapse: collapse;
-  border: 2px solid $tablehead;
-  border-spacing: 0;
-  border-bottom: 18px solid $tablehead;
-  background: $tablebg;
-  width: 85%;
-  margin: 0 auto 1em auto;
- }
+th, td
+  color $contenttext
+  border 1px solid $tablehead
+  padding 0.5em 1em
+  border-collapse collapse
 
-.wide {
-  width: 95%;
- }
-  
-th, td {
-  color: $contenttext;
-  border: 1px solid $tablehead;
-  padding: 0.5em 1em;
-  border-collapse: collapse;
-}
-
-th {
-  background: $tablehead;
-  color: $tableHeadText;
-  &.last {
-    border-right: none;
-  }
+th
+  background $tablehead
+  colo: $tableHeadText
+  &.last
+    border-right: none
   // text-transform: uppercase;
   // font-size: 1em;
   // text-align: center;
-}
 
-.fancy_tr {
-  background: $tablehead;
-  color: $tableHeadText;
-  font-size: 1em;
-  &.last {
-    border-right: none;
-  }
-  text-align: center;
-}
+.fancy_tr
+  background $tablehead
+  color $tableHeadText
+  font-size 1em
+  text-align: center
+  &.last
+    border-right none
 
 
-#gallery {
-  overflow: auto;
-  margin: 0 auto;
-  text-align: center;
-}
+#gallery
+  overflow auto
+  margin 0 auto
+  text-align center
 
-#gallery img {
-  max-width: 100%;
-  overflow: auto;
-  margin: 0 auto;
-  float: none;
-  border: 1px solid $navbar;
-}
-
-
-#info {
-  background-color: $content;
-  color: black;
-  text-align: center;
-  border-left: 2px solid $navbar;
-  border-right: 2px solid $navbar;
-  float: clear; 
-  padding: 10px 0 5px 0;
-}
-
-.map {
-  height: 200px;
-  width: 100%;
-  max-width: 500px;
-  border: 1px solid black;
-  max-height: 400px;
-}
+  img
+    max-width 100%
+    overflow auto
+    margin 0 auto
+    float none
+    border 1px solid $navbar
+// #gallery
 
 
+#info
+  background-color $content
+  color black
+  text-align center
+  border-left 2px solid $navbar
+  border-right 2px solid $navbar
+  float clear
+  padding 10px 0 5px 0
+
+.map
+  height 200px
+  width 100%
+  max-width 500px
+  border 1px solid black
+  max-height 400px
 
 
 
 @media screen and (max-width: 825px) {
-  
   h1 {
   position: absolute;
   top: 180px;
@@ -228,7 +181,6 @@ th {
 
 
 @media screen and (max-width: 655px) {
-
   .left50,
   .right50 {
     width: 99%;
@@ -239,7 +191,6 @@ th {
 
 
 @media screen and (max-width: 550px) {
-  
   h1 {
   position: relative;
   top: 0px;
@@ -257,7 +208,6 @@ th {
     margin: 0 auto;
   }
 
-  
   #tab-container {
     width: 100%;
   }

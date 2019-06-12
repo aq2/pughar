@@ -13,21 +13,23 @@ html
       #tab-container
         #navbar
           ul.tabs
-            li.tab.active(rel='welcome') Welcome
+            li.tab.active(rel='tenhabits') Ten Habits
+            li.tab(rel='welcome') Welcome
             li.tab(rel='treatments') Treatments
             li.tab(rel='training') Training
             li.tab(rel='yoga') Yoga Classes
             li.tab(rel='gallery') Gallery
-            li.tab(rel='about') About Me
+            // li.tab(rel='about') About Me
             li.tab(rel='contact') Contact
 
         #content
+          include includes/tenhabits.pug
           include includes/welcome.pug
           include includes/treatments.pug
           include includes/training.pug
           include includes/yoga.pug
           include includes/gallery.pug
-          include includes/about.pug
+          // include includes/about.pug
           include includes/contact.pug
 
       script(src='js/tabs.js')
