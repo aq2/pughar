@@ -9,6 +9,13 @@ $Email = Trim(stripslashes($_POST['email']));
 $Message = Trim(stripslashes($_POST['message']));
 $Subject = Trim(stripslashes($_POST['subject']));
 
+$HabitsPage = False;
+$Date = 'fish';
+if (strpos($Subject, 'Ten' == 0)) {
+  $HabitsPage = True;
+  $Date = Trim(stripslashes($_POST['date']));
+}
+
 
 // prepare email body text
 $Body = 'Name: ';
@@ -19,9 +26,19 @@ $Body .= $Email;
 $Body .= "\n\n";
 
 
+$Body .= 'Subject: ';
+$Body .= $Subject;
+$Body .= "\n\n";
 
-if(isset($_POST['date'])) {
-  $Date = $_POST['date'];
+$Body .= 'strpos: ';
+$Body .= strpos($Subject, 'Ten');
+$Body .= "\n\n";
+
+$Body .= "habits page: ";
+$Body .= $HabitsPage;
+$Body .= "\n\n";
+
+if ($HabitsPage) {
   $Body .= 'Talk date: ';
   $Body .= $Date;
   $Body .= "\n\n";
@@ -29,6 +46,10 @@ if(isset($_POST['date'])) {
 } else {
   $Body .= 'Message: ';
 }
+
+  $Body .= 'Talk date: ';
+  $Body .= $Date;
+  $Body .= "\n\n";
 
 $Body .= $Message;
 $Body .= "\n";

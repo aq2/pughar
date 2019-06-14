@@ -1,4 +1,4 @@
-form(name='ten-habits' method='post' action='./../php/simpleFormPhp.php')
+form(name='tenhabits' method='post' action='./../php/simpleFormPhp.php')
   p.
     Please fill out the form if you are interested in attending one of our free talks.
     All replies will be treated with upmost privacy.  Thank you.
@@ -16,7 +16,7 @@ form(name='ten-habits' method='post' action='./../php/simpleFormPhp.php')
           placeholder='Your email address' autocomplete='off')
 
     div
-      select.date(name='talkDate' form='ten-habits' required)
+      select#date.date(name='date' form='tenhabits' required)
         option(value='') Which talk date?
         option(value='29 June, Lotus Loft') 29 June, Lotus Loft
         option(value='3 August, Lotus Loft') 3 August, Lotus Loft
@@ -33,5 +33,5 @@ form(name='ten-habits' method='post' action='./../php/simpleFormPhp.php')
       input(type='hidden' name='subject'
           value='Ten habits form on website')
 
-      input(type='submit' value='send' name='button')
+      input(type='submit' value='send' name='submit')
 
