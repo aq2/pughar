@@ -1,45 +1,31 @@
-form(name='tenhabits' method='post' action='./../php/simpleFormPhp.php')
+form(method='post' action='php/processTenhabitsForm.php')
+
   p.
     Please fill out the form if you are interested in attending one of our free talks.
     All replies will be treated with upmost privacy.  Thank you.
 
   fieldset
-    br
     div
-      input.name(type='text' name='name'
-          tabindex=1 required
-          placeholder='Your name' autocomplete='off')
+      input.name(type='text' name='name' placeholder='your name' required)
 
     div
-      input.email(type='email' name='email'
-          tabindex=1 required
-          placeholder='Your email address' autocomplete='off')
+      input.email(type='text' name='email' placeholder='your email address' required)
 
     div
-      select#date.date(name='date' form='tenhabits' required)
-        option(value='') Which talk date?
+      select.date(name='date' required)
+        option(value='') which talk date?
         option(value='29 June, Lotus Loft') 29 June, Lotus Loft
+        option(value='27 July, derekthedog') 27 July, derekthedog
         option(value='3 August, Lotus Loft') 3 August, Lotus Loft
         option(value='26 October, Lotus Loft') 26 October, Lotus Loft
         option(value='23 November, Lotus Loft') 23 November, Lotus Loft
-        option(value='27 July, derekthedog') 27 July, derekthedog
 
     div
-      textarea.message(name='message'
-          placeholder='What is your single-most important challenge?'
-          rows=3 cols=30 required)
+      textarea.message(name='message' rows=3 cols=30 required
+          placeholder='what is your single-most important challenge?')
 
     div
-      input(type='hidden' name='subject'
-          value='Ten habits form on website')
+      input(type='hidden' name='subject' value='Ten habits form on website')
 
-      input(type='submit' value='send' name='submit')
-
-
-
-form(method='post' action='php/processTenhabits.php')
-
-  input.name(type='text' name='name' placeholder='your name' required)
-
-  input(type='submit' value='send')
+    input(type='submit' value='send' name='submit')
 

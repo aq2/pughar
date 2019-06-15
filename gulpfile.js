@@ -49,6 +49,14 @@ function pages() {
 exports.pages = pages
 
 
+function pages2() {
+  return gulp.src('src/pages/**/*.php')
+            .pipe(errorHandler(logError))
+            .pipe(gulp.dest('./www/pages'))
+}
+exports.pages2 = pages2
+
+
 function js() {
   return gulp.src('./src/js/**/*.js')
              .pipe(errorHandler(logError))
@@ -63,13 +71,14 @@ function phps() {
 }
 exports.phps = phps
 
-function phpPugs() {
-  return gulp.src('src/php/**/*.pug')
-             .pipe(errorHandler(logError))
-             .pipe(rename({ extname: '.php' }))
-             .pipe(gulp.dest('./www/php'))
-}
-exports.phpPugs = phpPugs
+// function phpPugs() {
+//   return gulp.src('src/php/**/*.pug')
+//              .pipe(errorHandler(logError))
+//              .pipe(pug())
+//              .pipe(rename({ extname: '.php' }))
+//              .pipe(gulp.dest('./www/php'))
+// }
+// exports.phpPugs = phpPugs
 
 
 function images() {
@@ -77,56 +86,6 @@ function images() {
              .pipe(gulp.dest('./www/images'))
 }
 exports.images = images
-
-
-
-gulp.task('default', function () {
-// gulp.task('connect-sync', function () {
-  connect.server({}, function () {
-    browserSync({
-      proxy: 'localhost:8000/www/index.html'
-    });
-  });
-
-  gulp.watch('./src/js/**/*.js', js)
-  gulp.watch('./src/php/**/*.php', phps).on('change', browserSync.reload)
-  gulp.watch('./src/php/**/*.pug', phpPugs).on('change', browserSync.reload)
-
-  gulp.watch('./src/images/**/*.*', images)
-  gulp.watch('./src/stylus/**/*.styl', styles)
-
-  gulp.watch('./src/index.pug', index).on('change', browserSync.reload)
-  gulp.watch('./src/pages/**/*.pug', pages).on('change', browserSync.reload)
-  gulp.watch('./src/includes/**/*.pug', gulp.parallel(index, pages)).on('change', browserSync.reload)
-
-  gulp.src('./src/index.*').pipe(notify('👓 Gulp up, running and watching 👓'))
-
-});
-
-
-// function watch() {
-//   browserSync.init({
-//     // server: './www',
-//     proxy:'localhost:8000/www/index.html',
-//     open: true,
-//     notify: false
-//   })
-
-//   // gulp.watch('./src/js/**/*.js', js)
-//   // gulp.watch('./src/php/**/*.php').on('change', browserSync.reload)
-//   // gulp.watch('./src/php/**/*.pug', phpPugs).on('change', browserSync.reload)
-
-//   // gulp.watch('./src/images/**/*.*', images)
-//   // gulp.watch('./src/stylus/**/*.styl', styles)
-
-//   // gulp.watch('./src/index.pug', index).on('change', browserSync.reload)
-//   // gulp.watch('./src/pages/**/*.pug', pages).on('change', browserSync.reload)
-//   // gulp.watch('./src/mixins/**/*.pug', gulp.parallel(index, pages)).on('change', browserSync.reload)
-//   // gulp.watch('./src/includes/**/*.pug', gulp.parallel(index, pages)).on('change', browserSync.reload)
-
-//   // gulp.src('./src/index.*').pipe(notify('👓 Gulp up, running and watching 👓'))
-// }
-// exports.watch = watch
 
 
 function nuke() {
@@ -142,16 +101,43 @@ function gza() {
 exports.gza = gza
 
 
+
+gulp.task('default', () => {
+  connect.server({}, () => {
+    browserSync({
+      proxy: 'localhost:3000/www/index.html'
+    })
+  })
+
+  gulp.watch('./src/js/**/*.js', js)
+  gulp.watch('./src/php/**/*.php', phps).on('change', browserSync.reload)
+  gulp.watch('./src/pages/**/*.php', pages2).on('change', browserSync.reload)
+  // gulp.watch('./src/php/**/*.pug', phpPugs).on('change', browserSync.reload)
+
+  gulp.watch('./src/images/**/*.*', images)
+  gulp.watch('./src/stylus/**/*.styl', styles)
+
+  gulp.watch('./src/index.pug', index).on('change', browserSync.reload)
+  gulp.watch('./src/pages/**/*.pug', pages).on('change', browserSync.reload)
+  gulp.watch('./src/includes/**/*.pug', gulp.parallel(index, pages)).on('change', browserSync.reload)
+
+  gulp.src('./src/index.*').pipe(notify('👓 Gulp up, running and watching 👓'))
+
+})
+
+
 gulp.task(
   'build',
     gulp.series(
       nuke,
       gulp.parallel(
-        index, pages, js, phps, phpPugs, images, styles
+        index, pages, pages2, js, phps, images, styles
       ),
-      // connect-sync,
-      gza,
-      // watch
+      gza
     )
 )
 
+let server = new connect()
+gulp.task('disconnect', function() {
+    server.closeServer();
+});

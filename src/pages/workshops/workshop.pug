@@ -1,12 +1,12 @@
-// general workshop template
-// make a pages/workshop/XYZ.pug and supply specific workshop data in the body container
-//
+//- general workshop template
+//- make a pages/workshop/XYZ.pug and supply specific workshop data in the body container
+//-
     -
       const workshopData = {
           place: 'Lotus Loft Yoga Centre',
           date: '3rd August 2019',
           iframeSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2525.8342564783893!2d-3.5261599999999653!3d50.723014000000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486da43db07c12b7%3A0x7cc3e5bad826796d!2sLotus+Loft!5e0!3m2!1sen!2suk!4v1422712288800',
-          phpID: 'Lotus Loft workshop 3rd August'
+          ID: 'Lotus Loft workshop 3rd August'
       }
 
     include ./../../mixins/workshop.pug
@@ -29,7 +29,7 @@ mixin workshop(info)
       &pound;10 non-refundable deposit for client cancellation<br>
       Full refund for instructor cancellation
 
-    form(name='wksh' method='post' action='./../../php/workshopPhp.php')
+    form(method='post' action='./processWorkshopForm.php')
       p.
         To book and pay for a place on this workshop, please fill out the following form, and I'll get back to you as soon as I can.
       fieldset
@@ -41,15 +41,15 @@ mixin workshop(info)
         div
           input.email(type='email' name='email' placeholder='Your email address' autocomplete='off' required)
         div
-          select(name='tickets' form='wksh')
+          select(name='tickets' required)
             option(value='deposit') Deposit: &nbsp;&pound;10
             option(value='single_full') Single ticket: &nbsp;&pound;30
             option(value='single_remainder') Remaining balance: &nbsp;&pound;20
             option(value='couple_full') Double ticket: &nbsp;&pound;50
             option(value='couple_remainder') Remaining balance: &nbsp;&pound;40
         div
-          input(value=info.phpID type='hidden' name='subject')
-          input(type='submit' value='Continue to PayPal' name='button')
+          input(name='subject' type='hidden' value=info.ID)
+          input(type='submit' value='Continue to PayPal' name='submit')
 
-  script(src='./../../js/jq-validate.min.js')
+  // script(src='./../../js/jq-validate.min.js')
 
