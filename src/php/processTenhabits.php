@@ -1,4 +1,4 @@
 <?php
 $name = $_POST['name'];
 
-echo 'Namei is ' . $name;
+echo 'My Name is indeed, and will always be... ' . $name;

@@ -1,10 +1,8 @@
 # todo's for saghar's website
 
+  * [✓] local php server → easy testing ✓ 15 Jun 15:01
+
   * [ ] fucking talkDate! why oh why?
-  * [⦁] style forms:
-    * [✓] 10habits
-    * [ ] workshops
-    * [✓] contact form
   * [ ] paypal buttons
   * [ ] workshopPhp to process paypal by ID?
   * [ ] deploy via ssh and rsync or summat?
@@ -16,6 +14,7 @@
     * [ ] 3 intensive - hungerhills
 
 
+  * [✓] style forms: ✓ 15 Jun 15:01
   * [✓] get form replies sooner? ✓ 14 Jun 14:28
     * [✓] try me@angelo.xyz? ✓ 14 Jun 14:28
   * [✓] add about me to welcome ✓ 12 Jun 17:44
