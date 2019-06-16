@@ -9,7 +9,7 @@
           ID: 'Lotus Loft workshop 3rd August'
       }
 
-    include ./../../mixins/workshop.pug
+    include ./../../include/workshop.pug
 
 mixin workshop(info)
   header
@@ -29,7 +29,7 @@ mixin workshop(info)
       &pound;10 non-refundable deposit for client cancellation<br>
       Full refund for instructor cancellation
 
-    form(method='post' action='./processWorkshopForm.php')
+    form(method='post' action='./../../php/processWorkshopForm.php')
       p.
         To book and pay for a place on this workshop, please fill out the following form, and I'll get back to you as soon as I can.
       fieldset

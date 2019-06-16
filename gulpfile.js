@@ -1,21 +1,13 @@
 const del = require('del'),
       gulp = require('gulp'),
       pug  = require('gulp-pug'),
-      stylus = require('gulp-stylus'),
       rename = require('gulp-rename'),
-      notify = require('gulp-notify'),    // install libnotify-bin
+      stylus = require('gulp-stylus'),
+      notify = require('gulp-notify'),  // install libnotify-bin
       connect = require('gulp-connect-php'),
+      browserSync = require('browser-sync'),
       sourcemaps = require('gulp-sourcemaps'),
-      errorHandler = require('gulp-error-handle'),
-      browserSync = require('browser-sync')
-
-
-const logError = (err) => {
-  notify.onError({
-    title: 'Gulp error ' + err.plugin,
-    message: err.toString()
-  })(err)
-}
+      errorHandler = require('gulp-error-handle')
 
 
 function styles() {
@@ -49,14 +41,6 @@ function pages() {
 exports.pages = pages
 
 
-function pages2() {
-  return gulp.src('src/pages/**/*.php')
-            .pipe(errorHandler(logError))
-            .pipe(gulp.dest('./www/pages'))
-}
-exports.pages2 = pages2
-
-
 function js() {
   return gulp.src('./src/js/**/*.js')
              .pipe(errorHandler(logError))
@@ -64,21 +48,13 @@ function js() {
 }
 exports.js = js
 
+
 function phps() {
   return gulp.src('./src/php/**/*.php')
              .pipe(errorHandler(logError))
              .pipe(gulp.dest('./www/php'))
 }
 exports.phps = phps
-
-// function phpPugs() {
-//   return gulp.src('src/php/**/*.pug')
-//              .pipe(errorHandler(logError))
-//              .pipe(pug())
-//              .pipe(rename({ extname: '.php' }))
-//              .pipe(gulp.dest('./www/php'))
-// }
-// exports.phpPugs = phpPugs
 
 
 function images() {
@@ -101,18 +77,30 @@ function gza() {
 exports.gza = gza
 
 
+const logError = (err) => {
+  notify.onError({
+    title: 'Gulp error ' + err.plugin,
+    message: err.toString()
+  })(err)
+}
 
+
+let server = new connect()
+gulp.task('disconnect', function() {
+    server.closeServer();
+});
+
+
+// tasks!
 gulp.task('default', () => {
   connect.server({}, () => {
     browserSync({
-      proxy: 'localhost:3000/www/index.html'
+      proxy: 'localhost:8000/www/index.html'
     })
   })
 
   gulp.watch('./src/js/**/*.js', js)
   gulp.watch('./src/php/**/*.php', phps).on('change', browserSync.reload)
-  gulp.watch('./src/pages/**/*.php', pages2).on('change', browserSync.reload)
-  // gulp.watch('./src/php/**/*.pug', phpPugs).on('change', browserSync.reload)
 
   gulp.watch('./src/images/**/*.*', images)
   gulp.watch('./src/stylus/**/*.styl', styles)
@@ -122,22 +110,16 @@ gulp.task('default', () => {
   gulp.watch('./src/includes/**/*.pug', gulp.parallel(index, pages)).on('change', browserSync.reload)
 
   gulp.src('./src/index.*').pipe(notify('👓 Gulp up, running and watching 👓'))
-
 })
 
 
-gulp.task(
-  'build',
+gulp.task('build',
     gulp.series(
       nuke,
       gulp.parallel(
-        index, pages, pages2, js, phps, images, styles
+        index, pages, js, phps, images, styles
       ),
       gza
     )
 )
 
-let server = new connect()
-gulp.task('disconnect', function() {
-    server.closeServer();
-});
