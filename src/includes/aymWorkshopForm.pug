@@ -1,0 +1,44 @@
+mixin aymWorkshop(info)
+
+  header
+    img(src='./../../images/header.jpg')
+    h1 Ayurvedic Yoga Massage
+
+  #apply_navbar
+    a(href='./../../index.html') back to main site
+
+  #info
+    h2 Ayurvedic Yoga Massage Workshop
+    h4= info.date
+    h4= info.place
+    p= info.address
+    iframe.map(src=info.iframeSrc frameborder=0)
+    p &pound;30 for individuals, &pound;50 for a couple (any partner or friend)
+    p.
+      &pound;10 non-refundable deposit for client cancellation<br>
+      Full refund for instructor cancellation
+
+    form(method='post' action='./../../php/processAymWorkshopForm.php')
+      p.
+        To book and pay for a place on this workshop, please fill out the following form, and I'll get back to you as soon as I can.
+      fieldset
+        p Your details
+        div
+          input.name(type='text' name='name' placeholder='Your name' autocomplete='off' required)
+        div
+          input.tel(type='tel' name='tel' placeholder='Your phone number' autocomplete='off' required)
+        div
+          input.email(type='email' name='email' placeholder='Your email address' autocomplete='off' required)
+        div
+          select(name='tickets' required)
+            option(value='deposit') Deposit: &nbsp;&pound;10
+            option(value='single_full') Single ticket: &nbsp;&pound;30
+            option(value='single_remainder') Remaining balance: &nbsp;&pound;20
+            option(value='couple_full') Double ticket: &nbsp;&pound;50
+            option(value='couple_remainder') Remaining balance: &nbsp;&pound;40
+        div
+          input(name='subject' type='hidden' value=info.ID)
+          input(type='submit' value='Continue to PayPal' name='submit')
+
+  // script(src='./../../js/jq-validate.min.js')
+

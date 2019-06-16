@@ -41,6 +41,16 @@ function pages() {
 exports.pages = pages
 
 
+
+function includes() {
+  return gulp.src('src/includes/**/*.pug')
+            .pipe(errorHandler(logError))
+            .pipe(pug())
+}
+exports.includes = includes
+
+
+
 function js() {
   return gulp.src('./src/js/**/*.js')
              .pipe(errorHandler(logError))
@@ -107,7 +117,7 @@ gulp.task('default', () => {
 
   gulp.watch('./src/index.pug', index).on('change', browserSync.reload)
   gulp.watch('./src/pages/**/*.pug', pages).on('change', browserSync.reload)
-  gulp.watch('./src/includes/**/*.pug', gulp.parallel(index, pages)).on('change', browserSync.reload)
+  gulp.watch('./src/includes/**/*.pug', gulp.parallel(index, includes, pages)).on('change', browserSync.reload)
 
   gulp.src('./src/index.*').pipe(notify('👓 Gulp up, running and watching 👓'))
 })
@@ -117,7 +127,7 @@ gulp.task('build',
     gulp.series(
       nuke,
       gulp.parallel(
-        index, pages, js, phps, images, styles
+        index, pages, includes, js, phps, images, styles
       ),
       gza
     )

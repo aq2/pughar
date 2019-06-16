@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    // set cssFile var for the mixin in the head include
+    - const cssFile = './../../css/main.min.css'
+    include ./../../includes/head.pug
+
+    // doesn't actually include mixin in html, but makes it available
+    include ./../../includes/yogaWorkshopForm.pug
+
+
+  body
+    #container
+      // set workshop data for workshop mixin
+      -
+        const workshopData = {
+            place: 'derekthedog Yoga Centre',
+            address: '83/84 Queen Street, Exeter',
+            date: 'Saturday, 21st September 2019',
+            iframeSrc: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5051.451978693518!2d-3.5314212749199507!3d50.72502247256642!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486da43be056ab0b%3A0x9431c90b86e7d057!2sDerekthedog+Yoga+Centre!5e0!3m2!1sen!2suk!4v1422711334901',
+            ID: 'derekthedog yoga workshop 21st September'
+        }
+
+      // call and include mixin in html
+      +yogaWorkshop(workshopData)
+
