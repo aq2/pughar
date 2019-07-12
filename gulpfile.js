@@ -41,14 +41,12 @@ function pages() {
 exports.pages = pages
 
 
-
 function includes() {
   return gulp.src('src/includes/**/*.pug')
             .pipe(errorHandler(logError))
             .pipe(pug())
 }
 exports.includes = includes
-
 
 
 function js() {
@@ -97,11 +95,11 @@ const logError = (err) => {
 
 let server = new connect()
 gulp.task('disconnect', function() {
-    server.closeServer();
-});
+    server.closeServer()
+})
 
 
-// tasks!
+// tasks
 gulp.task('default', () => {
   connect.server({}, () => {
     browserSync({
@@ -131,5 +129,14 @@ gulp.task('build',
       ),
       gza
     )
+)
+
+var child = require('child_process');
+
+gulp.task('launch-ls', () => {
+  return child.spawn(
+    'ls', [ '-la'],
+    { stdio: 'inherit' })
+  }
 )
 
