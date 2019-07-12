@@ -2,14 +2,40 @@
 
 # integrates gulp and docker
 
+# runs after ctrl-c
+function ctrl_c() {
+  echo 'Ctrl-c detected, shutting doon...'
+  docker-compose down
+}
 
-## grok (default)
-  # docker up
-  # gulp build (includes nuke)
-  # gulp watch
-    # trap ctrl-c →docker down
+# switch on argument
+case "$1" in
 
-## grok deploy
-  # ssh rsync whatever
-  # dev/live →eg saghar
+  build)
+    gulp build
+    ;;
+
+  deploy)
+    echo 'deploying...'
+    ;;
+
+  down)
+    docker-compose down
+    ;;
+
+  nuke)
+    gulp nuke
+    ;;
+
+  up)
+    docker-compose up
+    ;;
+
+  *)
+    docker-compose up -d
+    trap ctrl_c INT
+    gulp
+    ;;
+
+esac
 

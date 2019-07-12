@@ -103,7 +103,7 @@ gulp.task('disconnect', function() {
 gulp.task('default', () => {
   connect.server({}, () => {
     browserSync({
-      proxy: 'localhost:8000/www/index.html'
+      proxy: 'localhost:80'
     })
   })
 
@@ -129,14 +129,5 @@ gulp.task('build',
       ),
       gza
     )
-)
-
-var child = require('child_process');
-
-gulp.task('launch-ls', () => {
-  return child.spawn(
-    'ls', [ '-la'],
-    { stdio: 'inherit' })
-  }
 )
 
