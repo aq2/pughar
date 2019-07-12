@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# integrates gulp and docker
+
+
+## grok (default)
+  # docker up
+  # gulp build (includes nuke)
+  # gulp watch
+    # trap ctrl-c →docker down
+
+## grok deploy
+  # ssh rsync whatever
+  # dev/live →eg saghar
+
