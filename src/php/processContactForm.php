@@ -1,8 +1,8 @@
 <?php
 
 // where to send emails to
-$emailTo = 'me@angelo.xyz';
-
+$emailTo = 'angelo@fluxton.co.uk';
+// $emailTo = 'saghar@ayurvedicyogamassage.org.uk';
 
 // read and sanitise form questions
 $name = safify($_POST['name']);
@@ -31,10 +31,10 @@ $success = mail($emailTo, $subject, $body, "From: <$email>");
 
 // redirect to success page
 if ($success){
-  print "<meta http-equiv='refresh' content='0;URL=../pages/contactthanks.html'>";
+  print "<meta http-equiv='refresh' content='0;URL=../pages/formThanks.html'>";
 }
 else{
-  print "<meta http-equiv='refresh' content='0;URL=../error.html'>";
+  print "<meta http-equiv='refresh' content='0;URL=../pages/formError.html'>";
 }
 
 

@@ -1,7 +1,7 @@
 <?php
 
 // $EmailTo = 'saghar@ayurvedicyogamassage.org.uk';
-$EmailTo = 'me@angelo.xyz';
+$EmailTo = 'angelo@fluxton.co.uk';
 
 $Name = safify($_POST['name']);
 $Tel = safify($_POST['tel']);
@@ -26,7 +26,11 @@ $Body .= $Subject;
 $Body .= "\n\n";
 $Body .= 'Tickets: ';
 $Body .= $Tickets;
-$Body .= "\n";
+$Body .= "\n\n\n\n";
+$Body .= "Hi Saghar, little message from angelo...\n";
+$Body .= "This email only means that someone has filled in the workshop form.\n";
+$Body .= "It DOES NOT mean that they have paid.\n";
+$Body .= "PayPal will send you another email when they have paid.\n";
 
 
 // send email
@@ -51,7 +55,7 @@ if ($success) {
     echo "something's gone awry!";
   }
 } else {
-  print "<meta http-equiv='refresh' content='0;url=../paypal-error.html'>";
+  print "<meta http-equiv='refresh' content='0;url=../pages/formError.html'>";
 }
 
 
