@@ -1,12 +1,10 @@
 #!/bin/bash
-
 # grok: integrates gulp and docker
 
-# set locations
-SOURCE="./test/"
-DEV="angelo@drip:~/tripe/"
-PUB="angelo@drip:~/pipe/"
-
+# set file locations
+LOCAL_SOURCE="./www/"
+DEV="angelo@drip:~/dev/"
+PUB="angelo@drip:~/pub/"
 
 
 # sync to server
@@ -19,9 +17,8 @@ function sync() {
   fi
 
   echo 'deploying...'
-  rsync $SOURCE $1 --backup --backup-dir="bak_$(date +\\%Y-\\%m-\\%d)"   \
+  rsync $LOCAL_SOURCE $1 --backup --backup-dir="bak_$(date +\\%Y-\\%m-\\%d)"   \
     --delete --exclude 'bak*' --human-readable --progress --recursive --verbose
-
 }
 
 
@@ -31,9 +28,9 @@ function ctrl_c() {
   docker-compose down
 }
 
+
 # switch on argument
 case "$1" in
-
   build)
     gulp build
     ;;
@@ -42,16 +39,16 @@ case "$1" in
     sync $DEV
     ;;
 
-  pub)
-    sync $PUB
-    ;;
-
   down)
     docker-compose down
     ;;
 
   nuke)
     gulp nuke
+    ;;
+
+  pub)
+    sync $PUB
     ;;
 
   up)
