@@ -1,9 +1,14 @@
 #!/bin/bash
+#
 # grok: integrates gulp and docker
+#
+# commands: build, dev, down, nuke, pub, up
+# default: nuke, build, watch, docker-up
+
 
 # set file locations
 LOCAL_SOURCE="./www/"
-DEV="angelo@drip:~/dev/"
+DEV="ayurvedi@shell.gridhost.co.uk:~/subdomains/dev/"
 PUB="angelo@drip:~/pub/"
 
 
@@ -34,32 +39,25 @@ case "$1" in
   build)
     gulp build
     ;;
-
   dev)
     sync $DEV
     ;;
-
   down)
     docker-compose down
     ;;
-
   nuke)
     gulp nuke
     ;;
-
   pub)
     sync $PUB
     ;;
-
   up)
     docker-compose up
     ;;
-
   *)
     docker-compose up -d
     trap ctrl_c INT
     gulp
     ;;
-
 esac
 
