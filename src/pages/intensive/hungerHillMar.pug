@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    // set cssFile var for the mixin in the head include
+    - const cssFile = './../../css/main.min.css'
+    include ./../../includes/head.pug
+
+    // doesn't actually include mixin in html, but makes it available
+    include ./../../includes/intWorkshopForm.pug
+
+  body
+    #container
+      // set workshop data for workshop mixin
+      -
+        const workshopData = {
+          place: 'Hunger Hills Yurts',
+          date: 'Thu 12th - Sun 15th March 2020',
+          address: 'Newton Poppleford, Sidmouth',
+          iframeSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96285.95364073697!2d-3.3628547408609584!3d50.64191093906292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486d9ea450520d97%3A0xe9396096ca54de57!2sHunger+Hill+Yurts!5e0!3m2!1sen!2suk!4v1563455133627!5m2!1sen!2suk',
+          ID: 'hunger workshop 12th March'
+        }
+
+      // call and include mixin in html
+      +intWorkshop(workshopData)
+
