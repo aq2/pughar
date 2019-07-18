@@ -28,7 +28,6 @@ $body .= "\n\n";
 // send the email
 $success = mail($emailTo, $subject, $body, "From: <$email>");
 
-
 // redirect to success page
 if ($success){
   print "<meta http-equiv='refresh' content='0;URL=../pages/formThanks.html'>";

@@ -107,7 +107,10 @@ gulp.task('default', () => {
   //     // proxy: 'localhost:80'
   //   })
   // })
-  browserSync.init({ server: './www' })
+  browserSync.init({
+    // server: './www',
+    proxy: 'localhost:3000'
+  })
 
   gulp.watch('./src/js/**/*.js', js)
   gulp.watch('./src/php/**/*.php', phps).on('change', browserSync.reload)
