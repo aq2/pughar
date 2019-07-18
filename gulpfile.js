@@ -101,11 +101,12 @@ gulp.task('disconnect', function() {
 
 // tasks
 gulp.task('default', () => {
-  connect.server({}, () => {
-    browserSync({
-      proxy: 'localhost:80'
-    })
-  })
+  // connect.server({}, () => {
+    // browserSync({
+      // proxy: 'localhost:3000/www/index.html'
+      // proxy: 'localhost:80'
+    // })
+  // })
 
   gulp.watch('./src/js/**/*.js', js)
   gulp.watch('./src/php/**/*.php', phps).on('change', browserSync.reload)
@@ -130,4 +131,5 @@ gulp.task('build',
       gza
     )
 )
+
 

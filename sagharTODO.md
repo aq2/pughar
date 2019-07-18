@@ -1,16 +1,16 @@
 # todo's for saghar's website
 
 
-  * [ ] paypal buttons - share em!
-  * [ ] sanitize php input!
-  * [ ] workshopPhp to process paypal by ID?
+  * [✓] paypal buttons - share em!
+  * [✓] sanitize php input!
+  * [✓] workshopPhp to process paypal by ID?
 
-  * [ ] deploy via ssh and rsync or summat?
-  * [ ] donations for free talk - bad idea imho
+  * [✓] deploy via ssh and rsync or summat?
+  * [-] donations for free talk - bad idea imho
 
-  * [🞄] training:
+  * [⦁] training:
     * [✓] 3 AYM workshops - lotus
-    * [ ] 2 Sivananda yoga wkshops - derek
+    * [✓] 2 Sivananda yoga wkshops - derek
     * [ ] 3 intensive - hungerhills
 
 
@@ -27,3 +27,6 @@
   * [✓] consolidate/minimise js? ✓ 12 Jun 16:14
   * [✓] make a to-do page!
   * [-] minimise php? → no point, all run on server
+
+
+Last modified:
