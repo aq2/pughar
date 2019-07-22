@@ -9,18 +9,6 @@ web:
     - php
 
 
-# browser-sync:
-#   image: ustwo/browser-sync
-#   command: start --proxy "web:80" --files "www/*.css"
-#   volumes:
-#     - ./www:/www
-#   ports:
-#     - "3000:3000"
-#     - "3001:3001"
-#   links:
-#     - web
-
-
 php:
   image: php:7-fpm
   volumes:

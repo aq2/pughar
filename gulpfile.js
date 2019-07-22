@@ -3,7 +3,7 @@ const del = require('del'),
       pug  = require('gulp-pug'),
       rename = require('gulp-rename'),
       stylus = require('gulp-stylus'),
-      notify = require('gulp-notify'),  // install libnotify-bin
+      notify = require('gulp-notify'),    // apt install libnotify-bin
       connect = require('gulp-connect-php'),
       browserSync = require('browser-sync'),
       sourcemaps = require('gulp-sourcemaps'),
@@ -101,14 +101,7 @@ gulp.task('disconnect', function() {
 
 // tasks
 gulp.task('default', () => {
-  // connect.server({}, () => {
-  //   browserSync({
-  //     proxy: 'localhost:3000'
-  //     // proxy: 'localhost:80'
-  //   })
-  // })
   browserSync.init({
-    // server: './www',
     proxy: 'localhost:3000',
     open: false
   })

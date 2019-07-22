@@ -37,23 +37,17 @@ function ctrl_c() {
 # switch on argument
 case "$1" in
   build)
-    gulp build
-    ;;
+    gulp build;;
   dev)
-    sync $DEV
-    ;;
+    sync $DEV;;
   down)
-    docker-compose down
-    ;;
+    docker-compose down;;
   nuke)
-    gulp nuke
-    ;;
+    gulp nuke;;
   pub)
-    sync $PUB
-    ;;
+    sync $PUB;;
   up)
-    docker-compose up
-    ;;
+    docker-compose up;;
   *)
     docker-compose up -d
     trap ctrl_c INT
