@@ -35,11 +35,9 @@ $success = mail($emailTo, $subject, $body, "From: <$email>");
 
 
 // redirect to success page
-if ($success){
-  print "<meta http-equiv='refresh' content='0;URL=../pages/formThanks.html'>";
-}
-else{
-  //  print "😱 ";
+if ($success) {
+  print "<meta http-equiv='refresh' content='0;URL=../pages/contactThanks.html'>";
+} else {
   print "<meta http-equiv='refresh' content='0;URL=../pages/formError.html'>";
 }
 

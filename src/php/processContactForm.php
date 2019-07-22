@@ -29,10 +29,9 @@ $body .= "\n\n";
 $success = mail($emailTo, $subject, $body, "From: <$email>");
 
 // redirect to success page
-if ($success){
+if ($success) {
   print "<meta http-equiv='refresh' content='0;URL=../pages/formThanks.html'>";
-}
-else{
+} else {
   print "<meta http-equiv='refresh' content='0;URL=../pages/formError.html'>";
 }
 
@@ -46,3 +45,4 @@ function safify($var) {
   return $var;
 }
 
+?>
