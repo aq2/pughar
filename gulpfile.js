@@ -10,17 +10,25 @@ const del = require('del'),
       errorHandler = require('gulp-error-handle')
 
 
-function styles() {
-  return gulp.src('./src/stylus/main.styl')
-             .pipe(errorHandler(logError))
-             .pipe(sourcemaps.init())
-             .pipe(stylus({ compress: true }))
-             .pipe(rename({ suffix: '.min' }))
-             .pipe(sourcemaps.write('./'))
-             .pipe(gulp.dest('./www/css'))
-             .pipe(browserSync.stream())
+function gza() {
+  return gulp.src('./www/index.html').pipe(notify('🏠 Gulp building to be born 🏠'))
 }
-exports.styles = styles
+exports.gza = gza
+
+
+function images() {
+  return gulp.src('./src/images/**/*.*')
+             .pipe(gulp.dest('./www/images'))
+}
+exports.images = images
+
+
+function includes() {
+  return gulp.src('src/includes/**/*.pug')
+            .pipe(errorHandler(logError))
+            .pipe(pug())
+}
+exports.includes = includes
 
 
 function index() {
@@ -32,6 +40,21 @@ function index() {
 exports.index = index
 
 
+function js() {
+  return gulp.src('./src/js/**/*.js')
+             .pipe(errorHandler(logError))
+             .pipe(gulp.dest('./www/js'))
+}
+exports.js = js
+
+
+function nuke() {
+  gulp.src('./src').pipe(notify('😱 Gulp nuke and pave 😱'))
+  return del('./www/**/*')
+}
+exports.nuke = nuke
+
+
 function pages() {
   return gulp.src('src/pages/**/*.pug')
             .pipe(errorHandler(logError))
@@ -39,22 +62,6 @@ function pages() {
             .pipe(gulp.dest('./www/pages'))
 }
 exports.pages = pages
-
-
-function includes() {
-  return gulp.src('src/includes/**/*.pug')
-            .pipe(errorHandler(logError))
-            .pipe(pug())
-}
-exports.includes = includes
-
-
-function js() {
-  return gulp.src('./src/js/**/*.js')
-             .pipe(errorHandler(logError))
-             .pipe(gulp.dest('./www/js'))
-}
-exports.js = js
 
 
 function phps() {
@@ -65,24 +72,17 @@ function phps() {
 exports.phps = phps
 
 
-function images() {
-  return gulp.src('./src/images/**/*.*')
-             .pipe(gulp.dest('./www/images'))
+function styles() {
+  return gulp.src('./src/stylus/main.styl')
+             .pipe(errorHandler(logError))
+             .pipe(sourcemaps.init())
+             .pipe(stylus({ compress: true }))
+             .pipe(rename({ suffix: '.min' }))
+             .pipe(sourcemaps.write('./'))
+             .pipe(gulp.dest('./www/css'))
+             .pipe(browserSync.stream())
 }
-exports.images = images
-
-
-function nuke() {
-  gulp.src('./src').pipe(notify('😱 Gulp nuke and pave 😱'))
-  return del('./www/**/*')
-}
-exports.nuke = nuke
-
-
-function gza() {
-  return gulp.src('./www/index.html').pipe(notify('🏠 Gulp building to be born 🏠'))
-}
-exports.gza = gza
+exports.styles = styles
 
 
 const logError = (err) => {
