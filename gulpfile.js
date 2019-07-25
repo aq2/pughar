@@ -107,10 +107,10 @@ function watchFiles() {
     gulp.watch('./src/images/**/*.*', images)
     gulp.watch('./src/stylus/**/*.styl', styles)
 
+    gulp.watch('./src/php/**/*', gulp.parallel(phps, reloadBrowser))
     gulp.watch('./src/index.pug', gulp.parallel(index, reloadBrowser))
     gulp.watch('./src/pages/**/*.pug', gulp.parallel(pages, reloadBrowser))
     gulp.watch('./src/includes/**/*.pug', gulp.parallel(index, includes , reloadBrowser))
-    gulp.watch('./src/php/**/*', gulp.parallel(phps, reloadBrowser))
 
     gulp.src('./src/index.*').pipe(notify('👓 Gulp up, running and watching 👓'))
 }
