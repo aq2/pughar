@@ -1,5 +1,6 @@
 web:
   image: nginx:latest
+  container_name: nginx
   ports:
     - "3000:80"
   volumes:
@@ -11,5 +12,6 @@ web:
 
 php:
   image: php:7-fpm
+  container_name: php
   volumes:
     - ./www:/www

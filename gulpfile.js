@@ -5,8 +5,20 @@ const del = require('del'),
       stylus = require('gulp-stylus'),
       notify = require('gulp-notify'),    // apt install libnotify-bin
       plumber = require('gulp-plumber'),
+      exec = require('child_process').exec,
       browsersync = require('browser-sync'),
       sourcemaps = require('gulp-sourcemaps')
+
+
+function customPlumber(errTitle) {
+  exec("espeak -ven+m1 'oops gulp'")
+  return plumber({
+    errorHandler: notify.onError({
+      title: errTitle || 'Gulp Error',
+      message: 'Error: <%= error.message %>'
+    })
+  })
+}
 
 
 function gza() {
@@ -25,7 +37,7 @@ exports.images = images
 
 function includes() {
   return gulp.src('src/includes/**/*.pug')
-            .pipe(plumber())
+            .pipe(customPlumber('includes'))
             .pipe(pug())
 }
 exports.includes = includes
@@ -34,7 +46,7 @@ exports.includes = includes
 function index() {
   return gulp.src('./src/index.pug')
              .pipe(pug())
-             .pipe(plumber())
+             .pipe(customPlumber('index'))
              .pipe(gulp.dest('./www'))
 }
 exports.index = index
@@ -42,7 +54,7 @@ exports.index = index
 
 function js() {
   return gulp.src('./src/js/**/*.js')
-             .pipe(plumber())
+             .pipe(customPlumber('javascript'))
              .pipe(gulp.dest('./www/js'))
 }
 exports.js = js
@@ -51,6 +63,7 @@ exports.js = js
 function nuke() {
   gulp.src('./src')
       .pipe(notify('😱 Gulp nuke and pave 😱'))
+  exec('espeak -ven+f5 nuke')
   return del('./www/**/*')
 }
 exports.nuke = nuke
@@ -58,7 +71,7 @@ exports.nuke = nuke
 
 function pages() {
   return gulp.src('src/pages/**/*.pug')
-             .pipe(plumber())
+             .pipe(customPlumber('pages'))
              .pipe(pug())
              .pipe(gulp.dest('./www/pages'))
 }
@@ -67,7 +80,7 @@ exports.pages = pages
 
 function phps() {
   return gulp.src('./src/php/**/*')
-             .pipe(plumber())
+             .pipe(customPlumber('php'))
              .pipe(gulp.dest('./www/php'))
 }
 exports.phps = phps
@@ -77,7 +90,7 @@ function styles() {
   return gulp.src('./src/stylus/main.styl')
              .pipe(sourcemaps.init())
              .pipe(stylus({ compress: true }))
-             .pipe(plumber())
+             .pipe(customPlumber('stylus'))
              .pipe(rename({ suffix: '.min' }))
              .pipe(sourcemaps.write('./'))
              .pipe(gulp.dest('./www/css'))
@@ -112,6 +125,7 @@ function watchFiles() {
     gulp.watch('./src/pages/**/*.pug', gulp.parallel(pages, reloadBrowser))
     gulp.watch('./src/includes/**/*.pug', gulp.parallel(index, includes , reloadBrowser))
 
+    exec('espeak -ven+f5 watching')
     gulp.src('./src/index.*').pipe(notify('👓 Gulp up, running and watching 👓'))
 }
 exports.watchFiles = watchFiles
