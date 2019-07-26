@@ -11,7 +11,7 @@ const del = require('del'),
 
 
 function customPlumber(errTitle) {
-  exec("espeak -ven+m1 'oops gulp'")
+  // exec("espeak -ven+m1 'oops gulp'")
   return plumber({
     errorHandler: notify.onError({
       title: errTitle || 'Gulp Error',
