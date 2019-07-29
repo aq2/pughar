@@ -1,46 +1,49 @@
 <?php
 
-// where to send emails to
-// $emailTo = 'saghar@ayurvedicyogamassage.org.uk';
+require('mail/mailer.php');
+
+// where to send emails to, and where they appear to come from
 $emailTo = 'angelo@fluxton.co.uk';
+// $emailTo = 'saghar@ayurvedicyogamassage.org.uk';
+$emailCC = 'mickey.megabyte@gmail.com';
+
 
 // read and sanitise form questions
-$name = safify($_POST['name']);
-$email = safify($_POST['email']);
-$date = safify($_POST['date']);
-$message = safify($_POST['message']);
-$subject = safify($_POST['subject']);
+$form_name = safify($_POST['name']);
+$form_email = safify($_POST['email']);
+$form_date = safify($_POST['date']);
+$form_message = safify($_POST['message']);
+$form_subject = safify($_POST['subject']);
 
 
 // build up email body
-$body = 'Name: ';
-$body .= $name;
-$body .= "\n\n";
-
-$body .= 'Email address: ';
-$body .= $email;
-$body .= "\n\n";
-
-$body .= 'Talk date: ';
-$body .= $date;
-$body .= "\n\n";
-
-$body .= 'Most important challenge: ';
-$body .= $message;
-$body .= "\n\n";
+$body = '<h1>Free talk application</h1>';
+$body .= "<h2>Name: $form_name </h2>";
+$body .= "<h2>Email address: $form_email </h2>";
+$body .= "<h2>Talk date: $form_date </h2>";
+$body .= "<h2>Most important challenge: $form_message </h2>";
 
 
-// send the email
-$success = mail($emailTo, $subject, $body, "From: <$email>");
+try {
+  // Recipients
+  $mail->addAddress($emailTo);     // Add a recipient
+  $mail->setFrom($emailTo, 'from website');
+  $mail->addReplyTo($form_email);
+  $mail->addCC($emailCC);
 
+  // Content
+  $mail->isHTML(true);
+  $mail->Subject = $form_subject;
+  $mail->Body    = $body;
+  $mail->AltBody = $body;
 
-// redirect to success page
-if ($success) {
+  $mail->send();
   print "<meta http-equiv='refresh' content='0;URL=../pages/contactThanks.html'>";
-} else {
+
+} catch (Exception $e) {
+  /* echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"; */
   print "<meta http-equiv='refresh' content='0;URL=../pages/formError.html'>";
 }
-
 
 // sanitise user input - don't trust them!
 function safify($var) {

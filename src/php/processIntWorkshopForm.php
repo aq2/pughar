@@ -1,51 +1,67 @@
 <?php
 
-// $EmailTo = 'saghar@ayurvedicyogamassage.org.uk';
-$EmailTo = 'angelo@fluxton.co.uk';
+require('mail/mailer.php');
 
-$Name = safify($_POST['name']);
-$Gender = safify($_POST['gender']);
-$Age = safify($_POST['age']);
-$Tel = safify($_POST['tel']);
-$Email = safify($_POST['email']);
-$Health = safify($_POST['health']);
-$Meds = safify($_POST['medic']);
-$Workshops = safify($_POST['wksh']);
-$Quals = safify($_POST['quals']);
-$Subject = safify($_POST['subject']);
+// where to send emails to, and where they appear to come from
+$emailTo = 'angelo@fluxton.co.uk';
+// $emailTo = 'saghar@ayurvedicyogamassage.org.uk';
+$emailCC = 'mickey.megabyte@gmail.com';
 
-$headers = "From: <$Email>" . "\r\n" . "CC: mickey.megabyte@gmail.com";
+
+// read and sanitise form questions
+$form_name = safify($_POST['name']);
+$form_gender = safify($_POST['gender']);
+$form_age = safify($_POST['age']);
+$form_tel = safify($_POST['tel']);
+$form_email = safify($_POST['email']);
+$form_health = safify($_POST['health']);
+$form_meds = safify($_POST['medic']);
+$form_workshops = safify($_POST['wksh']);
+$form_quals = safify($_POST['quals']);
+$form_subject = safify($_POST['subject']);
+
 
 // prepare email body text
-$Body = '';
-$Body .= 'Name: ' . $Name . "\n\n";
-$Body .= 'Gender: ' . $Gender . "\n\n";
-$Body .= 'Age: ' . $Age . "\n\n";
-$Body .= 'Phone: ' . $Tel . "\n\n";
-$Body .= 'Email: ' . $Email . "\n\n";
-$Body .= 'Health Conditions: ' . $Health . "\n\n";
-$Body .= 'Medications: ' . $Meds . "\n\n";
-$Body .= 'Workshop already done: ' . $Workshops . "\n\n";
-$Body .= 'Qualifications: ' . $Quals . "\n\n";
-$Body .= 'Workshop applied for: ' . $Subject . "\n\n\n\n";
+$body = '<h1>Intensive workshop application</h1>';
+$body .= '<h2>Name: ' . $form_name . '</h2>';
+$body .= '<h2>Gender: ' . $form_gender . '</h2>';
+$body .= '<h2>Age: ' . $form_age . '</h2>';
+$body .= '<h2>Phone: ' . $form_tel . '</h2>';
+$body .= '<h2>Email: ' . $form_email . '</h2>';
+$body .= '<h2>Health Conditions: ' . $form_health . '</h2>';
+$body .= '<h2>Medications: ' . $form_meds . '</h2>';
+$body .= '<h2>Workshop already done: ' . $form_workshops . '</h2>';
+$body .= '<h2>Qualifications: ' . $form_quals . '</h2>';
+$body .= '<h2>Workshop applied for: ' . $form_subject . '</h2>';
+$body .= '<br><br>';
+$body .= "<p>Hi Saghar, little message from angelo...</p>";
+$body .= "<p>This email means that someone has applied for intensive workshop training.</p>";
+$body .= "<p>You have to approve them, and if they are OK, send them an email (";
+$body .= $form_email;
+$body .= "), and tell them to visit www.ayurvedicyogamassage.org.uk/pay4training </p>";
+$body .= "<p>OR, tell them they are not suitable.</p>";
+$body .= "<p>You will receive another email when they have filled in the new paying form,</p>";
+$body .= "<p>and PayPal will send you an email when they have paid.</p>";
 
-$Body .= "Hi Saghar, little message from angelo...\n";
-$Body .= "This email means that someone has applied for intensive workshop training.\n";
-$Body .= "You have to approve them, and if they are OK, send them an email (";
-$Body .= $Email;
-$Body .= "), and tell them to visit www.ayurvedicyogamassage.org.uk/pay4training ";
-$Body .= "OR, tell them they are not suitable.\n";
-$Body .= "You will receive another email when they have filled in the new form, ";
-$Body .= "and PayPal will send you an email when they have paid.\n";
 
+try {
+  // Recipients
+  $mail->addAddress($emailTo);     // Add a recipient
+  $mail->setFrom($emailTo, 'from website');
+  $mail->addReplyTo($form_email);
+  $mail->addCC($emailCC);
 
-// send email
-$success = mail($EmailTo, $Subject, $Body, $headers);
+  // Content
+  $mail->isHTML(true);
+  $mail->Subject = $form_subject;
+  $mail->Body    = $body;
+  $mail->AltBody = $body;
 
-// redirect to success page
-if ($success) {
-  print "<meta http-equiv='refresh' content='0;URL=../pages/intensiveThanks.html'>";
-} else {
+  $mail->send();
+  print "<meta http-equiv='refresh' content='0;URL=../pages/contactThanks.html'>";
+
+} catch (Exception $e) {
+  /* echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"; */
   print "<meta http-equiv='refresh' content='0;URL=../pages/formError.html'>";
 }
 

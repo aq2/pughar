@@ -1,37 +1,44 @@
 <?php
 
-// where to send emails to
+require('mail/mailer.php');
+
+// where to send emails to, and where they come from
 $emailTo = 'angelo@fluxton.co.uk';
 // $emailTo = 'saghar@ayurvedicyogamassage.org.uk';
+$emailCC = 'mickey.megabyte@gmail.com';
 
 // read and sanitise form questions
-$name = safify($_POST['name']);
-$email = safify($_POST['email']);
-$message = safify($_POST['message']);
-$subject = safify($_POST['subject']);
+$form_name = safify($_POST['name']);
+$form_email = safify($_POST['email']);
+$form_message = safify($_POST['message']);
+$form_subject = safify($_POST['subject']);
 
 
 // build up email body
-$body = 'Name: ';
-$body .= $name;
-$body .= "\n\n";
-
-$body .= 'Email address: ';
-$body .= $email;
-$body .= "\n\n";
-
-$body .= 'Message: ';
-$body .= $message;
-$body .= "\n\n";
+$body = '<h1>Response from website contact form</h1>';
+$body .= '<h2>Name: ' . $form_name . '</h2>';
+$body .= '<h2>Email address: ' . $form_email . '</h2>';
+$body .= '<h2>Message: '. $form_message . '</h2>';
 
 
-// send the email
-$success = mail($emailTo, $subject, $body, "From: <$email>");
+try {
+  // Recipients
+  $mail->addAddress($emailTo);     // Add a recipient
+  $mail->setFrom($emailTo, 'from website');
+  $mail->addReplyTo($form_email);
+  $mail->addCC($emailCC);
 
-// redirect to success page
-if ($success) {
-  print "<meta http-equiv='refresh' content='0;URL=../pages/formThanks.html'>";
-} else {
+  // Content
+  $mail->isHTML(true);
+  $mail->Subject = $form_subject;
+  $mail->Body    = $body;
+  $mail->AltBody = $body;
+
+  $mail->send();
+  print "<meta http-equiv='refresh' content='0;URL=../pages/contactThanks.html'>";
+
+} catch (Exception $e) {
+  /* echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"; */
   print "<meta http-equiv='refresh' content='0;URL=../pages/formError.html'>";
 }
 

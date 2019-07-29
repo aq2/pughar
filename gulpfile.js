@@ -4,14 +4,26 @@ const del = require('del'),
       rename = require('gulp-rename'),
       stylus = require('gulp-stylus'),
       notify = require('gulp-notify'),    // apt install libnotify-bin
-      connect = require('gulp-connect-php'),
-      browserSync = require('browser-sync'),
-      sourcemaps = require('gulp-sourcemaps'),
-      errorHandler = require('gulp-error-handle')
+      plumber = require('gulp-plumber'),
+      exec = require('child_process').exec,
+      browsersync = require('browser-sync'),
+      sourcemaps = require('gulp-sourcemaps')
+
+
+function customPlumber(errTitle) {
+  // exec("espeak -ven+m1 'oops gulp'")
+  return plumber({
+    errorHandler: notify.onError({
+      title: errTitle || 'Gulp Error',
+      message: 'Error: <%= error.message %>'
+    })
+  })
+}
 
 
 function gza() {
-  return gulp.src('./www/index.html').pipe(notify('🏠 Gulp building to be born 🏠'))
+  return gulp.src('./www/index.html')
+             .pipe(notify('🏠 Gulp building to be born 🏠'))
 }
 exports.gza = gza
 
@@ -25,7 +37,7 @@ exports.images = images
 
 function includes() {
   return gulp.src('src/includes/**/*.pug')
-            .pipe(errorHandler(logError))
+            .pipe(customPlumber('includes'))
             .pipe(pug())
 }
 exports.includes = includes
@@ -33,8 +45,8 @@ exports.includes = includes
 
 function index() {
   return gulp.src('./src/index.pug')
-             .pipe(errorHandler(logError))
              .pipe(pug())
+             .pipe(customPlumber('index'))
              .pipe(gulp.dest('./www'))
 }
 exports.index = index
@@ -42,14 +54,16 @@ exports.index = index
 
 function js() {
   return gulp.src('./src/js/**/*.js')
-             .pipe(errorHandler(logError))
+             .pipe(customPlumber('javascript'))
              .pipe(gulp.dest('./www/js'))
 }
 exports.js = js
 
 
 function nuke() {
-  gulp.src('./src').pipe(notify('😱 Gulp nuke and pave 😱'))
+  gulp.src('./src')
+      .pipe(notify('😱 Gulp nuke and pave 😱'))
+  exec('espeak -ven+f5 nuke')
   return del('./www/**/*')
 }
 exports.nuke = nuke
@@ -57,16 +71,16 @@ exports.nuke = nuke
 
 function pages() {
   return gulp.src('src/pages/**/*.pug')
-            .pipe(errorHandler(logError))
-            .pipe(pug())
-            .pipe(gulp.dest('./www/pages'))
+             .pipe(customPlumber('pages'))
+             .pipe(pug())
+             .pipe(gulp.dest('./www/pages'))
 }
 exports.pages = pages
 
 
 function phps() {
-  return gulp.src('./src/php/**/*.php')
-             .pipe(errorHandler(logError))
+  return gulp.src('./src/php/**/*')
+             .pipe(customPlumber('php'))
              .pipe(gulp.dest('./www/php'))
 }
 exports.phps = phps
@@ -74,60 +88,59 @@ exports.phps = phps
 
 function styles() {
   return gulp.src('./src/stylus/main.styl')
-             .pipe(errorHandler(logError))
              .pipe(sourcemaps.init())
              .pipe(stylus({ compress: true }))
+             .pipe(customPlumber('stylus'))
              .pipe(rename({ suffix: '.min' }))
              .pipe(sourcemaps.write('./'))
              .pipe(gulp.dest('./www/css'))
-             .pipe(browserSync.stream())
+             .pipe(browsersync.stream())
 }
 exports.styles = styles
 
 
-const logError = (err) => {
-  notify.onError({
-    title: 'Gulp error ' + err.plugin,
-    message: err.toString()
-  })(err)
-}
-
-
-let server = new connect()
-gulp.task('disconnect', function() {
-    server.closeServer()
-})
-
-
-// tasks
-gulp.task('default', () => {
-  browserSync.init({
+function syncBrowser() {
+  browsersync.init({
     proxy: 'localhost:3000',
     open: false
   })
-
-  gulp.watch('./src/js/**/*.js', js)
-  gulp.watch('./src/php/**/*.php', phps).on('change', browserSync.reload)
-
-  gulp.watch('./src/images/**/*.*', images)
-  gulp.watch('./src/stylus/**/*.styl', styles)
-
-  gulp.watch('./src/index.pug', index).on('change', browserSync.reload)
-  gulp.watch('./src/pages/**/*.pug', pages).on('change', browserSync.reload)
-  gulp.watch('./src/includes/**/*.pug', gulp.parallel(index, includes, pages)).on('change', browserSync.reload)
-
-  gulp.src('./src/index.*').pipe(notify('👓 Gulp up, running and watching 👓'))
-})
+}
+exports.syncBrowser = syncBrowser
 
 
-gulp.task('build',
-    gulp.series(
-      nuke,
-      gulp.parallel(
-        index, pages, includes, js, phps, images, styles
-      ),
-      gza
-    )
+function reloadBrowser(done) {
+  browsersync.reload();
+  done();
+}
+exports.reloadBrowser = reloadBrowser
+
+
+function watchFiles() {
+    gulp.watch('./src/js/**/*.js', js)
+    gulp.watch('./src/images/**/*.*', images)
+    gulp.watch('./src/stylus/**/*.styl', styles)
+
+    gulp.watch('./src/php/**/*', gulp.parallel(phps, reloadBrowser))
+    gulp.watch('./src/index.pug', gulp.parallel(index, reloadBrowser))
+    gulp.watch('./src/pages/**/*.pug', gulp.parallel(pages, reloadBrowser))
+    gulp.watch('./src/includes/**/*.pug', gulp.parallel(index, includes , reloadBrowser))
+
+    exec('espeak -ven+f5 watching')
+    gulp.src('./src/index.*').pipe(notify('👓 Gulp up, running and watching 👓'))
+}
+exports.watchFiles = watchFiles
+
+
+// define complex multi-tasks
+const build = gulp.series(
+  nuke,
+  gulp.parallel(index, pages, includes, js, phps, images, styles),
+  gza
 )
+exports.build = build
 
+const watch = gulp.parallel(watchFiles, syncBrowser)
+exports.watch = watch
+
+exports.default = gulp.series(build, watch)
 
