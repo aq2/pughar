@@ -26,7 +26,7 @@ $body .= "<br><br>";
 $body .= "<p>Hi Saghar, little message from angelo...</p>";
 $body .= "<p>This email only means that someone has filled in the workshop form.</p>";
 $body .= "<p>It DOES NOT mean that they have paid.</p>";
-$body .= "<p>PayPal will send you another email when they have paid.</p>";
+$body .= "<p>PayPal will send you another email when they have paid.<\p>";
 
 
 try {
@@ -46,7 +46,6 @@ try {
 
   // transer to paypal payment page
   $blah = "<meta http-equiv='refresh' content='0;url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=";
-
   switch ($form_tickets) {
     case "single_full":
       print $blah . "3SF2SCKDLUR3A8" . "'>";
