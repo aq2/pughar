@@ -14,6 +14,10 @@ h3.accordion_heading.last_acc(rel='contact') Contact
         div
           textarea.message(name='message' rows=3 cols=30 placeholder='write me a message...' required)
 
+        //- css hidden honeypot - only automated spammers will see this and attempt to fill
+        div
+          input.website(type='text' name='website' autocomplete='off')
+
         div
           input(type='hidden' name='subject' value='Contact form on website')
           input(type='submit' value='send' name='button')

@@ -1,5 +1,12 @@
 <?php
 
+// first of all, check honeypot for spam
+if (!empty($_POST['website'])) {
+  // it's SPAM
+  die();
+}
+
+
 require('mail/mailer.php');
 
 // where to send emails to, and where they appear to come from
@@ -42,6 +49,33 @@ $body .= "), and tell them to visit www.ayurvedicyogamassage.org.uk/pay4training
 $body .= "<p>OR, tell them they are not suitable.</p>";
 $body .= "<p>You will receive another email when they have filled in the new paying form,</p>";
 $body .= "<p>and PayPal will send you an email when they have paid.</p>";
+
+$this_serva = $_SERVER['SERVER_NAME'];
+
+
+/* $this_serva = 'www.ayurvedicyogamassage.org.uk'; */
+/* $this_serva = 'php-docker.local'; */
+
+// if _server = php-docker.local →http://localhost....
+// if = dev.ayurvedic →
+// if = www.ayurvedic... →
+
+$request = 'http://localhost:3001';
+
+
+$linka = $request . '/php/approve.php';
+$linka .= '?name=' . $form_name;
+$linka .= '&gender=' . $form_gender;
+$linka .= '&age=' . $form_age;
+$linka .= '&tel=' . $form_tel;
+$linka .= '&email=' . $form_email;
+$linka .= '&health=' . $form_health;
+$linka .= '&meds=' . $form_meds;
+$linka .= '&workshops=' . $form_workshops;
+$linka .= '&quals=' . $form_quals;
+$linka .= '&subject=' . $form_subject;
+
+$body .= '<p><a href=\'' . $linka . '\'>here</a></p>';
 
 
 try {

@@ -35,6 +35,11 @@ mixin yogaWorkshop(info)
             option(value='deposit') Deposit: &nbsp;&pound;10
             option(value='single_full') Single ticket: &nbsp;&pound;30
             option(value='single_remainder') Remaining balance: &nbsp;&pound;20
+
+        //- css hidden honeypot - only automated spammers will see this and attempt to fill
+        div
+          input.website(type='text' name='website' autocomplete='off')
+
         div
           input(name='subject' type='hidden' value=info.ID)
           input(type='submit' value='Continue to PayPal' name='submit')

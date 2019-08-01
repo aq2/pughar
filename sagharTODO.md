@@ -1,5 +1,15 @@
 # todo's for saghar's website
 
+  * form css icons
+  * approve.php
+    * how to unhard-code?
+      * toggle a line like emails for dev/live
+  * pay4training
+    * nov.pug, mar.pug →use mixin
+  * honeypot + check for links in message = SPAM
+  * [ ] paypal buttons for training?
+
+
 
   * [✓] paypal buttons - share em!
   * [✓] sanitize php input!
@@ -8,10 +18,10 @@
   * [✓] deploy via ssh and rsync or summat?
   * [-] donations for free talk - bad idea imho
 
-  * [⦁] training:
+  * [✓] training:
     * [✓] 3 AYM workshops - lotus
     * [✓] 2 Sivananda yoga wkshops - derek
-    * [ ] 3 intensive - hungerhills
+    * [✓] 3 intensive - hungerhills
 
 
   * [-] fucking talkDate! why oh why?

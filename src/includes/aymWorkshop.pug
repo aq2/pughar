@@ -36,6 +36,11 @@ mixin aymWorkshop(info)
             option(value='single_remainder') Remaining balance: &nbsp;&pound;20
             option(value='couple_full') Double ticket: &nbsp;&pound;50
             option(value='couple_remainder') Remaining balance: &nbsp;&pound;40
+
+        //- css hidden honeypot - only automated spammers will see this and attempt to fill
+        div
+          input.website(type='text' name='website' autocomplete='off')
+
         div
           input(name='subject' type='hidden' value=info.ID)
           input(type='submit' value='Continue to PayPal' name='submit')

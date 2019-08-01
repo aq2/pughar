@@ -8,7 +8,7 @@ mixin intWorkshop(info)
     a(href='./../../index.html') back to main site
 
   #info
-    h2 Ayurvedic Yoga Massage Intensive Workshop Training
+    h2 Ayurvedic Yoga Massage Intensive Training
     h4= info.date
     h4= info.place
     p= info.address
@@ -53,6 +53,11 @@ mixin intWorkshop(info)
           span.question Do you have any other training course qualification?
           input#quals-box(type='checkbox')
           textarea#quals(name='quals' rows=3 cols=30 placeholder='Please provide brief details')
+
+        //- css hidden honeypot - only automated spammers will see this and attempt to fill
+        div
+          input.website(type='text' name='website' autocomplete='off')
+
 
         div
           input(name='subject' type='hidden' value=info.ID)

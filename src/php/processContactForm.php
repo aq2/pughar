@@ -1,5 +1,11 @@
 <?php
 
+// first of all, check honeypot for spam
+if (!empty($_POST['website'])) {
+  // it's SPAM
+  die();
+}
+
 require('mail/mailer.php');
 
 // where to send emails to, and where they come from
