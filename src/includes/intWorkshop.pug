@@ -9,7 +9,7 @@ mixin intWorkshop(info)
 
   #info
     h2 Ayurvedic Yoga Massage Intensive Training
-    h4= info.date
+    h4(id='date')= info.date
     h4= info.place
     p= info.address
     iframe.map(src=info.iframeSrc frameborder=0)
@@ -61,30 +61,37 @@ mixin intWorkshop(info)
 
         div
           input(name='subject' type='hidden' value=info.ID)
+
+          //- could also add info.date, location, mapref?
+          // p= info.address
+          script.
+            var datte = $('#date').textContent
+            document.write('fish ' + datte)
+            console.log('fis♥er')
           input(type='submit' value='Apply for course' name='button')
 
   // script(src='./../../js/jq-validate.min.js')
   script.
     $(document).ready(function() {
           $("#health-box").click(function() {
-            $("#health").fadeToggle(400);
-          });
+            $("#health").fadeToggle(400)
+          })
           $("#meds-box").click(function() {
             $("#meds").fadeToggle(400);
-          });
+          })
           $("#quals-box").click(function() {
             $("#quals").fadeToggle(400);
-          });
+          })
           $("#wksh-box").click(function() {
             $("#workshop").fadeToggle(400);
-          });
-        });
+          })
+        })
 
-        $.validator.messages.required = "We really do need this info!";
-        $("#wksh").validate({
-          submitHandler: function(form) {
-            form.submit();
-          }
-    });
+        // $.validator.messages.required = "We really do need this info!";
+        // $("#wksh").validate({
+          // submitHandler: function(form) {
+            // form.submit();
+          // }
+    // });
 
 
