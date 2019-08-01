@@ -1,12 +1,12 @@
 # todo's for saghar's website
 
-  * form css icons
-  * approve.php
-    * how to unhard-code?
-      * toggle a line like emails for dev/live
-  * pay4training
-    * nov.pug, mar.pug →use mixin
-  * honeypot + check for links in message = SPAM
+  * [ ] form css icons
+  * [ ] approve.php
+    * [ ] how to unhard-code?
+      * [ ] toggle a line like emails for dev/live
+  * [ ] pay4training
+    * [ ] nov.pug, mar.pug →use mixin
+  * [ ] honeypot + check for links in message = SPAM
   * [ ] paypal buttons for training?
 
 
