@@ -52,6 +52,12 @@ $body .= "<p>and PayPal will send you an email when they have paid.</p>";
 
 $this_serva = $_SERVER['SERVER_NAME'];
 
+if ($this_serva == 'php-docker.local') {
+  $request = 'http://localhost:3001';
+} else {
+  $request = 'http://www.ayurvedicyogamassage.org.uk';
+}
+
 
 /* $this_serva = 'www.ayurvedicyogamassage.org.uk'; */
 /* $this_serva = 'php-docker.local'; */
@@ -60,7 +66,6 @@ $this_serva = $_SERVER['SERVER_NAME'];
 // if = dev.ayurvedic →
 // if = www.ayurvedic... →
 
-$request = 'http://localhost:3001';
 
 
 $linka = $request . '/php/approve.php';
