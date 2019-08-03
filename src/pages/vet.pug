@@ -1,25 +1,39 @@
 doctype html
 html
   head
-    // - const cssFile = '../css/main.min.css'
-    // include ../includes/head.pug
+    - const cssFile = '../css/main.min.css'
+    include ../includes/head.pug
 
   body
-    #container
-      #detailsDiv
+    #false_container
+      .left50
+        #detailsDiv
+          h1 Intensive Massage Workshop Application
         #vet
-      #email
-    
+          button#yesBtn YEP - we want
+          span &nbsp;&nbsp;&nbsp;&nbsp;
+          button#noBtn NO thank you
+      #email.hidden.right50
+        form(method='post' action='./../php/processVetForm' id='vetForm')
+          p.
+            Saghar, please add a little personal message underneath the text below.
+            For example, if you've rejected them, tell them why.
+          p Then press the 'send email...' button'
+          textarea#vetBox(name='vetbox' rows=20 cols=40)
+          input(type='submit' value='send email to client and saghar' name='submit')
+
     script.
       main()
 
       function main() {
         var details = getDetails()
         showDetails(details)
-        showButtons(details)
+        // now just listen for button mouse clicks
+        listenOut('yesBtn', true)
+        listenOut('noBtn', false)
       }
 
-      function getDetails() {     
+      function getDetails() {
         const urlParams = new URLSearchParams(window.location.search)
         var details = []
         for (var p of urlParams) {
@@ -30,29 +44,38 @@ html
 
       function showDetails(details) {
         // iterate over details and show on screen
+        var detailsDiv = document.getElementById('detailsDiv')
         for (var d in details) {
-          var paraNode = document.createElement('P')
-          var textNode = document.createTextNode(d + ': ' + details[d])
-          paraNode.appendChild(textNode)
-          document.body.appendChild(paraNode)
+          if (d != 'mapRef') {
+            var paraNode = document.createElement('P')
+            var textNode = document.createTextNode(d + ': ' + details[d])
+            paraNode.appendChild(textNode)
+            detailsDiv.appendChild(paraNode)
+          }
         }
       }
 
-      function showButtons(details) {
-        makeButton('YES - accept', true)
-        makeButton('NO - reject', false)
-      }
-
-      function makeButton(text, accepted) {
-        var newBtn = document.createElement('button')
-        newBtn.innerHTML = text
-        newBtn.addEventListener('click',
-          () => {vet(accepted)}
+      function listenOut(btn, good) {
+        const button = document.getElementById(btn)
+        button.addEventListener('click',
+          () => {vet(good)}
         )
-        document.body.appendChild(newBtn)
       }
 
-      function vet(accepted) {
-        console.log(accepted)
-        // stick email body in form!
+      function vet(good) {
+        const email = document.getElementById('email')
+        email.style.visibility = 'visible'
+        message = buildMessage(good)
+        const area = document.getElementById('vetBox')
+        area.innerHTML = message
       }
+
+      function buildMessage(good) {
+        var details = getDetails()
+        var msg = 'Hi ' + details['name'] + ', I am ' + (good ? 'pleased ' : 'sorry ') + 'to inform you that you have ' + (good ? '' : 'not ')
+        msg += 'been accepted onto the ayurvedic yoga massage intensive training course at ' + details['place'] + ' on ' + details['date'] + '.\n\n'
+        msg += (good ? 'Please press the button below to be taken to payPal for payment. Thank you.\n\n' : 'The reason why I am uncomfortable with training you is ')
+        msg += (good ? '-→ add button here ←-\n\n' : '')
+        return msg
+      }
+
