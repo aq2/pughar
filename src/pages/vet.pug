@@ -26,7 +26,7 @@ html
       main()
 
       function main() {
-        var details = getDetails()
+        const details = getDetails()
         showDetails(details)
         // now just listen for button mouse clicks
         listenOut('yesBtn', true)
@@ -35,8 +35,8 @@ html
 
       function getDetails() {
         const urlParams = new URLSearchParams(window.location.search)
-        var details = []
-        for (var p of urlParams) {
+        const details = []
+        for (let p of urlParams) {
           details[p[0]] = p[1]   // key = value
         }
         return details
@@ -44,11 +44,12 @@ html
 
       function showDetails(details) {
         // iterate over details and show on screen
-        var detailsDiv = document.getElementById('detailsDiv')
-        for (var d in details) {
+        const doc = document
+        const detailsDiv = doc.getElementById('detailsDiv')
+        for (let d in details) {
           if (d != 'mapRef') {
-            var paraNode = document.createElement('P')
-            var textNode = document.createTextNode(d + ': ' + details[d])
+            let paraNode = doc.createElement('P')
+            let textNode = doc.createTextNode(d + ': ' + details[d])
             paraNode.appendChild(textNode)
             detailsDiv.appendChild(paraNode)
           }
@@ -56,23 +57,20 @@ html
       }
 
       function listenOut(btn, good) {
-        const button = document.getElementById(btn)
-        button.addEventListener('click',
-          () => {vet(good)}
+        document.getElementById(btn).addEventListener('click',
+          () => { vet(good) }
         )
       }
 
       function vet(good) {
-        const email = document.getElementById('email')
-        email.style.visibility = 'visible'
-        message = buildMessage(good)
-        const area = document.getElementById('vetBox')
-        area.innerHTML = message
+        const doc = document
+        doc.getElementById('email').style.visibility = 'visible'
+        doc.getElementById('vetBox').innerHTML = buildMessage(good)
       }
 
       function buildMessage(good) {
-        var details = getDetails()
-        var msg = 'Hi ' + details['name'] + ', I am ' + (good ? 'pleased ' : 'sorry ') + 'to inform you that you have ' + (good ? '' : 'not ')
+        const details = getDetails()
+        let msg = 'Hi ' + details['name'] + ', I am ' + (good ? 'pleased ' : 'sorry ') + 'to inform you that you have ' + (good ? '' : 'not ')
         msg += 'been accepted onto the ayurvedic yoga massage intensive training course at ' + details['place'] + ' on ' + details['date'] + '.\n\n'
         msg += (good ? 'Please press the button below to be taken to payPal for payment. Thank you.\n\n' : 'The reason why I am uncomfortable with training you is ')
         msg += (good ? '-→ add button here ←-\n\n' : '')
