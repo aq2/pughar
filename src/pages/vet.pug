@@ -1,0 +1,58 @@
+doctype html
+html
+  head
+    // - const cssFile = '../css/main.min.css'
+    // include ../includes/head.pug
+
+  body
+    #container
+      #detailsDiv
+        #vet
+      #email
+    
+    script.
+      main()
+
+      function main() {
+        var details = getDetails()
+        showDetails(details)
+        showButtons(details)
+      }
+
+      function getDetails() {     
+        const urlParams = new URLSearchParams(window.location.search)
+        var details = []
+        for (var p of urlParams) {
+          details[p[0]] = p[1]   // key = value
+        }
+        return details
+      }
+
+      function showDetails(details) {
+        // iterate over details and show on screen
+        for (var d in details) {
+          var paraNode = document.createElement('P')
+          var textNode = document.createTextNode(d + ': ' + details[d])
+          paraNode.appendChild(textNode)
+          document.body.appendChild(paraNode)
+        }
+      }
+
+      function showButtons(details) {
+        makeButton('YES - accept', true)
+        makeButton('NO - reject', false)
+      }
+
+      function makeButton(text, accepted) {
+        var newBtn = document.createElement('button')
+        newBtn.innerHTML = text
+        newBtn.addEventListener('click',
+          () => {vet(accepted)}
+        )
+        document.body.appendChild(newBtn)
+      }
+
+      function vet(accepted) {
+        console.log(accepted)
+        // stick email body in form!
+      }

@@ -123,7 +123,7 @@ function watchFiles() {
     gulp.watch('./src/php/**/*', gulp.series(phps, reloadBrowser))
     gulp.watch('./src/index.pug', gulp.series(index, reloadBrowser))
     gulp.watch('./src/pages/**/*.pug', gulp.series(pages, reloadBrowser))
-    gulp.watch('./src/includes/**/*.pug', gulp.series(index, includes , reloadBrowser))
+    gulp.watch('./src/includes/**/*.pug', gulp.series(includes, gulp.parallel(pages, index), reloadBrowser))
 
     exec('espeak -ven+f5 watching')
     gulp.src('./src/index.*').pipe(notify('👓 Gulp up, running and watching 👓'))
@@ -134,7 +134,8 @@ exports.watchFiles = watchFiles
 // define complex multi-tasks
 const build = gulp.series(
   nuke,
-  gulp.parallel(index, pages, includes, js, phps, images, styles),
+  includes,
+  gulp.parallel(index, pages, js, phps, images, styles),
   gza
 )
 exports.build = build

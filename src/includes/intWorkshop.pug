@@ -9,13 +9,15 @@ mixin intWorkshop(info)
 
   #info
     h2 Ayurvedic Yoga Massage Intensive Training
-    h4(id='date')= info.date
+    h4= info.date
     h4= info.place
     p= info.address
     iframe.map(src=info.iframeSrc frameborder=0)
     p &pound;350 for individuals, &pound;90 deposit requested at least two weeks before start date
     p Full refund for instructor cancellation
-    p It is important to have attended a workshop session before taking the training course.<br>Alternatively, you can phone or <a href="mailto:saghar@ayurvedicyogamassage.org.uk">email</a> Saghar to arrange a short interview.
+    p.
+      It is important to have attended a workshop session before taking the training course.<br>
+      Alternatively, you can phone or <a href="mailto:saghar@ayurvedicyogamassage.org.uk">email Saghar</a> to arrange a short interview.
 
     form(method='post' action='./../../php/processIntWorkshopForm.php')
       p To apply for a place on this training course, please fill out the following form, and I'll get back to you as soon as I can.
@@ -61,13 +63,11 @@ mixin intWorkshop(info)
 
         div
           input(name='subject' type='hidden' value=info.ID)
+          input(name='date' type='hidden' value=info.date)
+          input(name='place' type='hidden' value=info.place)
+          input(name='address' type='hidden' value=info.address)
+          input(name='iframeSrc' type='hidden' value=info.iframeSrc)
 
-          //- could also add info.date, location, mapref?
-          // p= info.address
-          script.
-            var datte = $('#date').textContent
-            document.write('fish ' + datte)
-            console.log('fis♥er')
           input(type='submit' value='Apply for course' name='button')
 
   // script(src='./../../js/jq-validate.min.js')

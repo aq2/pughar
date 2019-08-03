@@ -26,6 +26,10 @@ $form_meds = safify($_POST['medic']);
 $form_workshops = safify($_POST['wksh']);
 $form_quals = safify($_POST['quals']);
 $form_subject = safify($_POST['subject']);
+$form_date = safify($_POST['date']);
+$form_place = safify($_POST['place']);
+$form_address = safify($_POST['address']);
+$form_mapRef = safify($_POST['iframeSrc']);
 
 
 // prepare email body text
@@ -39,36 +43,22 @@ $body .= '<h2>Health Conditions: ' . $form_health . '</h2>';
 $body .= '<h2>Medications: ' . $form_meds . '</h2>';
 $body .= '<h2>Workshop already done: ' . $form_workshops . '</h2>';
 $body .= '<h2>Qualifications: ' . $form_quals . '</h2>';
-$body .= '<h2>Workshop applied for: ' . $form_subject . '</h2>';
+$body .= "<h2>Workshop applied for: $form_place, $form_date </h2>";
 $body .= '<br><br>';
-$body .= "<p>Hi Saghar, little message from angelo...</p>";
-$body .= "<p>This email means that someone has applied for intensive workshop training.</p>";
-$body .= "<p>You have to approve them, and if they are OK, send them an email (";
-$body .= $form_email;
-$body .= "), and tell them to visit www.ayurvedicyogamassage.org.uk/pay4training </p>";
-$body .= "<p>OR, tell them they are not suitable.</p>";
-$body .= "<p>You will receive another email when they have filled in the new paying form,</p>";
-$body .= "<p>and PayPal will send you an email when they have paid.</p>";
+$body .= "<h4>Hi Saghar, little message from angelo...</h4>";
+$body .= "<h4>This email means that someone has applied for intensive workshop training.</h4>";
+$body .= "<h4>You now have to approve or reject them.</h4>";
 
+
+// now build up info to appear in link to approve
 $this_serva = $_SERVER['SERVER_NAME'];
-
 if ($this_serva == 'php-docker.local') {
   $request = 'http://localhost:3001';
 } else {
   $request = 'http://www.ayurvedicyogamassage.org.uk';
 }
 
-
-/* $this_serva = 'www.ayurvedicyogamassage.org.uk'; */
-/* $this_serva = 'php-docker.local'; */
-
-// if _server = php-docker.local →http://localhost....
-// if = dev.ayurvedic →
-// if = www.ayurvedic... →
-
-
-
-$linka = $request . '/php/approve.php';
+$linka = $request . '/pages/vet.html';
 $linka .= '?name=' . $form_name;
 $linka .= '&gender=' . $form_gender;
 $linka .= '&age=' . $form_age;
@@ -79,8 +69,12 @@ $linka .= '&meds=' . $form_meds;
 $linka .= '&workshops=' . $form_workshops;
 $linka .= '&quals=' . $form_quals;
 $linka .= '&subject=' . $form_subject;
+$linka .= '&place=' . $form_place;
+$linka .= '&date=' . $form_date;
+$linka .= '&address=' . $form_address;
+$linka .= '&mapRef=' . $form_mapRef;
 
-$body .= '<p><a href=\'' . $linka . '\'>here</a></p>';
+$body .= '<h2><button><a href=\'' . $linka . '\'>here</a></button></h2>';
 
 
 try {
@@ -100,8 +94,8 @@ try {
   print "<meta http-equiv='refresh' content='0;URL=../pages/contactThanks.html'>";
 
 } catch (Exception $e) {
-  /* echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"; */
-  print "<meta http-equiv='refresh' content='0;URL=../pages/formError.html'>";
+  echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+  /* print "<meta http-equiv='refresh' content='0;URL=../pages/formError.html'>"; */
 }
 
 
