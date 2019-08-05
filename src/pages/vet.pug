@@ -11,7 +11,7 @@ html
           h1 Intensive Massage Workshop Application
         #vet
           button#yesBtn YEP - we want
-          span &nbsp;&nbsp;&nbsp;&nbsp;
+          span &emsp;
           button#noBtn NO thank you
       #email.hidden.right50
         form(method='post' action='./../php/processVetForm' id='vetForm')
@@ -70,10 +70,34 @@ html
 
       function buildMessage(good) {
         const details = getDetails()
-        let msg = 'Hi ' + details['name'] + ', I am ' + (good ? 'pleased ' : 'sorry ') + 'to inform you that you have ' + (good ? '' : 'not ')
+        let msg = 'Hi ' + details['name'] + ', this is Saghar from ayurvedicyogamassage.org.uk. I am ' + (good ? 'pleased ' : 'sorry ') + 'to inform you that you have ' + (good ? '' : 'not ')
         msg += 'been accepted onto the ayurvedic yoga massage intensive training course at ' + details['place'] + ' on ' + details['date'] + '.\n\n'
-        msg += (good ? 'Please press the button below to be taken to payPal for payment. Thank you.\n\n' : 'The reason why I am uncomfortable with training you is ')
+        msg += (good ? 'Please press the button below for further course details and payment methods. Thank you.\n\n' : 'The reason why I am uncomfortable with training you is ')
         msg += (good ? '-→ add button here ←-\n\n' : '')
+
+        // button needs to be link to pay4.html with name, place, address, mapRef, date
+        // make button
+        // add eventlistener
+        // add params!
+        // add it here!
+        if (good) {
+          addPay4Button(details)
+        }
+
+
+        msg += 'If you need to contact me, you can simply reply to this email, or phone Saghar on 07974 470 610 \n\n'
         return msg
+      }
+
+      function addPay4Button(details) {
+        // make button
+        const doc = document
+        const pay4Btn = doc.createElement('button')
+        // add eventlistener
+        pay4Btn.addEventListener('click',
+          () => { gotoPay4() }
+        )
+        // add params!
+        // add it here!
       }
 
