@@ -9,7 +9,7 @@ $emailTo = 'angelo@fluxton.co.uk';
 // $emailTo = 'saghar@ayurvedicyogamassage.org.uk';
 $emailCC = 'mickey.megabyte@gmail.com';
 
-$msg = $_POST['vetbox'];
+$msg = $_POST['punterMsg'];
 
 echo $msg;
 
@@ -30,7 +30,7 @@ try {
   print "<meta http-equiv='refresh' content='0;URL=../pages/contactThanks.html'>";
 
 } catch (Exception $e) {
-  /* echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"; */
-  print "<meta http-equiv='refresh' content='0;URL=../pages/formError.html'>";
+  echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+  /* print "<meta http-equiv='refresh' content='0;URL=../pages/formError.html'>"; */
 }
 

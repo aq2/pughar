@@ -5,47 +5,55 @@ html
     include ../includes/head.pug
 
   body
-    #false_container
-      .left50
-        #detailsDiv
-          h1 Intensive Massage Workshop Application
-        #vet
-          button#yesBtn YEP - we want
-          span &emsp;
-          button#noBtn NO thank you
-      #email.hidden.right50
-        form(method='post' action='./../php/mailVetForm.php' id='vetForm')
-          p.
-            Saghar, please add a little personal message underneath the text below.
-            For example, if you've rejected them, tell them why.
-          p Then press the 'send email...' button'
-          textarea#vetBox(name='vetbox' rows=20 cols=40)
-          input(type='submit' value='send email to client and saghar' name='submit')
+    #vetContainer.left50
+      #detailsDiv
+        h1 Intensive Massage Workshop Application
+      #buttonz
+        button#yesBtn YEP - we want
+        span &emsp;
+        button#noBtn NO thank you
+    #email.right50.hidden
+      form(method='post' action='./../php/mailVetForm.php' id='vetForm' onsubmit='return sendEmail(this)')
+        p Saghar, please add a little personal message underneath the text below.
+        p For example, if you've rejected them, tell them why.
+        p Then press the 'send email...' button' at the bottom
+
+        #msgDiv
+          #msgTxt(contenteditable='true')
+
+        //- hidden text field gets populated with msg on submit
+        input.hidden(type='text' id='punterMsg' name='punterMsg')
+
+        input(type='submit' value='send email to client and saghar')
+        // button(type='submit' form='vetForm' onclick=sendEmail())
 
 
     script.
       main()
 
       function main() {
-        const details = getDetails()
-        showDetails(details)
-        // now just listen for button mouse clicks
+        getAndShowDetails()
+        // listen for button mouse clicks
         listenOut('yesBtn', true)
         listenOut('noBtn', false)
       }
 
+
       function getDetails() {
-        const urlParams = new URLSearchParams(window.location.search)
+        // populate and return details array with url query string parameters
         const details = []
+        const urlParams = new URLSearchParams(window.location.search)
         for (let p of urlParams) {
           details[p[0]] = p[1]   // key = value
         }
         return details
       }
 
-      function showDetails(details) {
+
+      function getAndShowDetails() {
         // iterate over details and show on screen
         const doc = document
+        const details = getDetails()
         const detailsDiv = doc.getElementById('detailsDiv')
         for (let d in details) {
           if (d != 'mapRef') {
@@ -57,38 +65,63 @@ html
         }
       }
 
+
       function listenOut(btn, good) {
-        document.getElementById(btn).addEventListener('click',
-          () => { vet(good) }
-        )
+        // add eventlistener to button
+        document.getElementById(btn)
+                .addEventListener('click', () => { vet(good) })
       }
+
 
       function vet(good) {
+        // called by YES/NO buttons
         const doc = document
         doc.getElementById('email').style.visibility = 'visible'
-        doc.getElementById('vetBox').innerHTML = buildMessage(good)
+        doc.getElementById('msgTxt').outerHTML = buildMessage(good)
       }
 
+
       function buildMessage(good) {
+        // build up message that gets sent to punter
         const details = getDetails()
-        let msg = 'Hi ' + details['name'] + ', this is Saghar from ayurvedicyogamassage.org.uk. I am ' + (good ? 'pleased ' : 'sorry ') + 'to inform you that you have ' + (good ? '' : 'not ')
-        msg += 'been accepted onto the ayurvedic yoga massage intensive training course at ' + details['place'] + ' on ' + details['date'] + '.\n\n'
-        msg += (good ? 'Please press the button below for further course details and payment methods. Thank you.\n\n' : 'The reason why I am uncomfortable with training you is ')
-
-        // button needs to be link to pay4.html with name, place, address, mapRef, date
-        if (good) {
-          msg += makePay4Button(details)
-          msg += '\n\n'
-        }
-
-        msg += 'If you need to contact me, you can simply reply to this email, or phone Saghar on 07974 470 610 \n\n'
+        let msg = "<div id='msgTxt'>"
+                + '<p>Hi ' + details['name']
+                + ', this is Saghar from ayurvedicyogamassage.org.uk.</p>'
+                + '<p>I am ' + (good ? 'pleased ' : 'sorry ')
+                + 'to inform you that you have ' + (good ? '' : 'not ')
+                + 'been accepted onto the ayurvedic yoga massage intensive training course at '
+                + details['place'] + ' on ' + details['date'] + '</p><p>'
+                + (good ? 'Please press the button below for further details. Thank you.'
+                        : 'The reason why I am uncomfortable with training you is ') + '</p>'
+                + (good ? makePay4Button(details) : '')
+                + '<p>If you need to contact me, simply reply to this email '
+                + 'or phone Saghar on 07974 470 610</p>'
+                + '</div>'
         return msg
       }
 
+
       function makePay4Button(details) {
-        var btnHtml = "<a href='pay4training.html"
-                    + "?name=" + details['name']
-                    + "'><button>clicky</button></a>"
+        const btnHtml = "<p align='center'>"
+                      + "<a href='pay4training.html"
+                      + "?name=" + details['name']
+                      + "&place" + details['place']
+                      + "&address" + details['address']
+                      + "&mapRef" + details['mapRef']
+                      + "&date=" + details['date']
+                      + "'>"
+                      + "<button>clicky</button>"
+                      + "</a></p>"
         return btnHtml
       }
 
+
+      function sendEmail(form) {
+        // msg gets injected into hidden text field
+        // then return true, so form gets posted to php emailer
+        const doc = document
+        const txtField = doc.getElementById('punterMsg')
+        const msg =  doc.getElementById('msgTxt').outerHTML
+        txtField.value = msg
+        return true
+      }
