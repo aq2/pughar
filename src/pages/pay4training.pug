@@ -9,12 +9,16 @@ html
       p.
         Here are your details for the ayurvedic yoga massage intensive
         training course at #[span#place -place-] on #[span#date -date-].
-      // include map!
-      // times
+
+      // TODO times?
+
+      iframe.map#map
+
       p.
         Prices are &pound;350 for individuals, with a &pound;90 deposit requested two
         weeks before the start date 
         // (so that will be #[span#fortnite -fortnight-]).
+
 
       p clicking on any of the buttons below will take you securely to payPal
 
@@ -26,35 +30,34 @@ html
         button pay remainder &pound;260
 
 
-    script.
+      script.
 
-      main()
+        main()
 
-      function main() {
-        const details = getDetails()
-        replaceSpans(details)
-      }
-
-      function getDetails() {
-        // populate and return details array with url query string parameters
-        const details = []
-        const urlParams = new URLSearchParams(window.location.search)
-        for (let p of urlParams) {
-          details[p[0]] = p[1]   // key = value
+        function main() {
+          const details = getDetails()
+          replaceSpans(details)
         }
-        return details
-      }
 
-      function replaceSpans(details) {
-        for (let d in details) {
-          // d is name, details[d] is freddy
-          // find span called d, and replace with details[d]
-          if (document.getElementById(d)) {
-            document.getElementById(d).innerHTML = details[d]
-            console.log(d + ' found')
-          } else {
-            console.log(d + ' not found')
+        function getDetails() {
+          // populate and return details array with url query string parameters
+          const details = []
+          const urlParams = new URLSearchParams(window.location.search)
+          for (let p of urlParams) {
+            details[p[0]] = p[1]   // key = value
           }
+          return details
         }
-      }
+
+        function replaceSpans(details) {
+          const doc = document
+          for (let d in details) {
+            // d is name, details[d] is freddy
+            // find span called d, and replace with details[d]
+            if (doc.getElementById(d)) {
+              doc.getElementById(d).innerHTML = details[d]
+            }
+          }
+          doc.getElementById('map').src = details['mapRef']
+        }
 
