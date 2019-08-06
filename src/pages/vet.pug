@@ -103,11 +103,11 @@ html
 
       function makePay4Button(details) {
         const btnHtml = "<p align='center'>"
-                      + "<a href='pay4training.html"
+                      + "<a href='localhost:3001/pages/pay4training.html"
                       + "?name=" + details['name']
-                      + "&place" + details['place']
-                      + "&address" + details['address']
-                      + "&mapRef" + details['mapRef']
+                      + "&place=" + details['place']
+                      + "&address=" + details['address']
+                      + "&mapRef=" + details['mapRef']
                       + "&date=" + details['date']
                       + "'>"
                       + "<button>clicky</button>"
