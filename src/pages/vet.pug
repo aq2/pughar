@@ -67,7 +67,6 @@ html
 
 
       function listenOut(btn, good) {
-        // add eventlistener to button
         document.getElementById(btn)
                 .addEventListener('click', () => { vet(good) })
       }
@@ -84,9 +83,9 @@ html
       function buildMessage(good) {
         // build up message that gets sent to punter
         const details = getDetails()
-        let msg = "<div id='msgTxt'>"
-                + '<p>Hi ' + details['name']
-                + ', this is Saghar from ayurvedicyogamassage.org.uk.</p>'
+        let msg = "<div id='msgTxt' contenteditable='true'>"
+                + '<h3>Hi ' + details['name']
+                + ', this is Saghar from ayurvedicyogamassage.org.uk.</h3>'
                 + '<p>I am ' + (good ? 'pleased ' : 'sorry ')
                 + 'to inform you that you have ' + (good ? '' : 'not ')
                 + 'been accepted onto the ayurvedic yoga massage intensive training course at '
@@ -102,15 +101,15 @@ html
 
 
       function makePay4Button(details) {
-        const btnHtml = "<p align='center'>"
-                      + "<a href='localhost:3001/pages/pay4training.html"
+        const btnHtml = "<p>"
+                      + "<a href='http://dev.ayurvedicyogamassage.org.uk/pages/pay4training.html"
                       + "?name=" + details['name']
                       + "&place=" + details['place']
                       + "&address=" + details['address']
                       + "&mapRef=" + details['mapRef']
                       + "&date=" + details['date']
                       + "'>"
-                      + "<button>clicky</button>"
+                      + "<button>more details</button>"
                       + "</a></p>"
         return btnHtml
       }
