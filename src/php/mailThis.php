@@ -1,0 +1,31 @@
+<?php
+// required by scripts that want to send email
+
+
+// where to send emails to, and where they appear to come from
+$emailTo = 'angelo@fluxton.co.uk';
+// $emailTo = 'saghar@ayurvedicyogamassage.org.uk';
+$emailCC = 'mickey.megabyte@gmail.com';
+$emailFrom = 'saghar@ayurvedicyogamassage.org.uk';
+
+$failPage = '../pages/formError.html';
+
+// Create HTML email headers
+$headers  = 'MIME-Version: 1.0' . "\r\n"
+          . 'Content-type: text/html; charset=iso-8859-1' . "\r\n"
+          . 'From: ' . $emailFrom . "\r\n"
+          . 'Reply-To: '.$emailFrom."\r\n"
+          . 'Cc: ' . $emailCC . "\r\n"
+          . 'X-Mailer: PHP/' . phpversion();
+
+
+// send the mail, or at least try to...
+$success = mail($emailTo, $emailSubject, $emailBody, $headers);
+
+
+// redirect to success page, hopefully
+if ($success) {
+  print "<meta http-equiv='refresh' content='0;URL=" . $successPage . "'>";
+} else {
+  print "<meta http-equiv='refresh' content='0;URL=" . $failPage . "'>";
+}

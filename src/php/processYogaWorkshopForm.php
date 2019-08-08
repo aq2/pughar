@@ -7,13 +7,6 @@ if (!empty($_POST['website'])) {
 }
 
 
-require('mail/mailer.php');
-
-// where to send emails to, and where they appear to come from
-$emailTo = 'angelo@fluxton.co.uk';
-// $emailTo = 'saghar@ayurvedicyogamassage.org.uk';
-$emailCC = 'mickey.megabyte@gmail.com';
-
 // read and sanitize form responses
 $form_name = safify($_POST['name']);
 $form_tel = safify($_POST['tel']);
@@ -23,34 +16,27 @@ $form_subject = safify($_POST['subject']);
 
 
 // prepare email body text
-$body = '<h1>Yoga workshop reply</h1>';
-$body .= "<h2>Name: $form_name </h2>";
-$body .= "<h2>Phone: $form_tel </h2>";
-$body .= "<h2>Email: $form_email </h2>";
-$body .= "<h2>Workshop: $form_subject </h2>";
-$body .= "<h2>Tickets: $form_tickets </h2>";
-$body .= "<br><br>";
-$body .= "<p>Hi Saghar, little message from angelo...</p>";
-$body .= "<p>This email only means that someone has filled in the yoga workshop form.</p>";
-$body .= "<p>It DOES NOT mean that they have paid.</p>";
-$body .= "<p>PayPal will send you another email when they have paid.</p>";
+$emailBody = '<h1>Yoga workshop reply</h1>'
+            . "<h2>Name: $form_name </h2>"
+            . "<h2>Phone: $form_tel </h2>"
+              . "<h2>Email: $form_email </h2>"
+            . "<h2>Workshop: $form_subject </h2>"
+          . "<h2>Tickets: $form_tickets </h2>"
+          . "<br><br>"
+          . "<p>Hi Saghar, little message from angelo...</p>"
+          . "<p>This email only means that someone has filled in the yoga workshop form.</p>"
+            . "<p>It DOES NOT mean that they have paid.</p>"
+          . "<p>PayPal will send you another email when they have paid.</p>";
+
+$emailSubject = form_subject;
+$successPage = '../pages/contactThanks.html';
 
 
-try {
-  // Recipients
-  $mail->addAddress($emailTo);     // Add a recipient
-  $mail->setFrom($emailTo, 'from website');
-  $mail->addReplyTo($form_email);
-  $mail->addCC($emailCC);
+// now mail this!
+require_once('mailThis.php');
 
-  // Content
-  $mail->isHTML(true);
-  $mail->Subject = $form_subject;
-  $mail->Body    = $body;
-  $mail->AltBody = $body;
 
-  $mail->send();
-
+if ($success) {
   // transer to paypal payment page
   $blah = "<meta http-equiv='refresh' content='0;url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=";
 
@@ -69,8 +55,7 @@ try {
       echo "something's gone awry!";
   }
 
-} catch (Exception $e) {
-  /* echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"; */
+} else {
   print "<meta http-equiv='refresh' content='0;URL=../pages/formError.html'>";
 }
 

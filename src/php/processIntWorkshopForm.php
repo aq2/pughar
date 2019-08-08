@@ -6,15 +6,6 @@ if (!empty($_POST['website'])) {
   die();
 }
 
-
-require('mail/mailer.php');
-
-// where to send emails to, and where they appear to come from
-$emailTo = 'angelo@fluxton.co.uk';
-// $emailTo = 'saghar@ayurvedicyogamassage.org.uk';
-$emailCC = 'mickey.megabyte@gmail.com';
-
-
 // read and sanitise form questions
 $form_name = safify($_POST['name']);
 $form_gender = safify($_POST['gender']);
@@ -33,8 +24,8 @@ $form_mapRef = safify($_POST['iframeSrc']);
 
 
 // prepare email body text
-$body = '<h1>Intensive workshop application</h1>'
-      . '<h2>Name: ' . $form_name . '</h2>'
+$emailBody = '<h1>Intensive workshop application</h1>'
+           . '<h2>Name: ' . $form_name . '</h2>'
       . '<h2>Gender: ' . $form_gender . '</h2>'
       . '<h2>Age: ' . $form_age . '</h2>'
       . '<h2>Phone: ' . $form_tel . '</h2>'
@@ -74,29 +65,13 @@ $linka = $request . '/pages/vet.html'
        . '&address=' . $form_address
        . '&mapRef=' . $form_mapRef;
 
-$body .= '<h2><button><a href=\'' . $linka . '\'>click here</a></button></h2>';
+$emailBody .= '<h2><button><a href=\'' . $linka . '\'>click here</a></button></h2>';
 
+$emailSubject = $form_subject;
+$successPage = '../pages/intensiveThanks.html';
 
-try {
-  // Recipients
-  $mail->addAddress($emailTo);     // Add a recipient
-  $mail->setFrom($emailTo, 'from website');
-  $mail->addReplyTo($form_email);
-  $mail->addCC($emailCC);
-
-  // Content
-  $mail->isHTML(true);
-  $mail->Subject = $form_subject;
-  $mail->Body    = $body;
-  $mail->AltBody = $body;
-
-  $mail->send();
-  print "<meta http-equiv='refresh' content='0;URL=../pages/intensiveThanks.html'>";
-
-} catch (Exception $e) {
-  echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-  /* print "<meta http-equiv='refresh' content='0;URL=../pages/formError.html'>"; */
-}
+// now mail this!
+require_once('mailThis.php');
 
 
 // sanitise user input - don't trust them!
@@ -107,6 +82,5 @@ function safify($var) {
   $var = htmlentities($var);
   return $var;
 }
-
 
 ?>
