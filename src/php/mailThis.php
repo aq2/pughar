@@ -3,9 +3,8 @@
 
 
 // where to send emails to, and where they appear to come from
-$emailTo = 'angelo@fluxton.co.uk';
-// $emailTo = 'saghar@ayurvedicyogamassage.org.uk';
-$emailCC = 'mickey.megabyte@gmail.com';
+$emailTo = 'saghar@ayurvedicyogamassage.org.uk';
+$emailCC = 'angelo@fluxton.co.uk';
 $emailFrom = 'saghar@ayurvedicyogamassage.org.uk';
 
 $failPage = '../pages/formError.html';

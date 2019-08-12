@@ -46,7 +46,7 @@ $this_serva = $_SERVER['SERVER_NAME'];
 if ($this_serva == 'php-docker.local') {
   $request = 'http://localhost:3001';
 } else {
-  $request = 'http://dev.ayurvedicyogamassage.org.uk';
+  $request = 'http://ayurvedicyogamassage.org.uk';
 }
 
 $linka = $request . '/pages/vet.html'
