@@ -1,13 +1,9 @@
 <?php
-
-// first of all, check honeypot for spam
-if (!empty($_POST['website'])) {
-  // it's SPAM
-  die();
-}
+// this file uses old mailer format!  need to change
 
 
-require('mail/mailer.php');
+require_once('validators.php');
+
 
 // where to send emails to, and where they appear to come from
 $emailTo = 'angelo@fluxton.co.uk';

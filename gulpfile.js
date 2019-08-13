@@ -116,11 +116,11 @@ exports.reloadBrowser = reloadBrowser
 
 
 function watchFiles() {
-    gulp.watch('./src/js/**/*.js', js)
     gulp.watch('./src/images/**/*.*', images)
     gulp.watch('./src/stylus/**/*.styl', styles)
 
     gulp.watch('./src/php/**/*', gulp.series(phps, reloadBrowser))
+    gulp.watch('./src/js/**/*.js', gulp.series(js, reloadBrowser))
     gulp.watch('./src/index.pug', gulp.series(index, reloadBrowser))
     gulp.watch('./src/pages/**/*.pug', gulp.series(pages, reloadBrowser))
     gulp.watch('./src/includes/**/*.pug', gulp.series(includes, gulp.parallel(pages, index), reloadBrowser))

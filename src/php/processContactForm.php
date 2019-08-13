@@ -1,10 +1,6 @@
 <?php
 
-// first of all, check honeypot for spam
-if (!empty($_POST['website'])) {
-  // it's SPAM
-  die();
-}
+require_once('validators.php');
 
 // read and sanitise form questions
 $formName = safify($_POST['name']);
@@ -22,17 +18,9 @@ $emailBody = '<h1>Response from website contact form</h1>'
 $emailSubject = 'message received';
 $successPage = '../pages/contactThanks.html';
 
+
 // now mail this!
 require_once('mailThis.php');
 
-
-// sanitise user input - don't trust them!
-function safify($var) {
-  $var = trim($var);
-  $var = strip_tags($var);
-  $var = stripslashes($var);
-  $var = htmlentities($var);
-  return $var;
-}
 
 ?>

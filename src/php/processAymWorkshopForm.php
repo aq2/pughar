@@ -1,10 +1,7 @@
 <?php
 
-// first of all, check honeypot for spam
-if (!empty($_POST['website'])) {
-  // it's SPAM
-  die();
-}
+require_once('validators.php');
+
 
 // read and sanitise form questions
 $formName = safify($_POST['name']);
@@ -60,14 +57,5 @@ if ($success) {
   print "<meta http-equiv='refresh' content='0;URL=../pages/formError.html'>";
 }
 
-
-// sanitise user input - don't trust them!
-function safify($var) {
-  $var = trim($var);
-  $var = strip_tags($var);
-  $var = stripslashes($var);
-  $var = htmlentities($var);
-  return $var;
-}
 
 ?>

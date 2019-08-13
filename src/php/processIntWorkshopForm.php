@@ -1,10 +1,6 @@
 <?php
 
-// first of all, check honeypot for spam
-if (!empty($_POST['website'])) {
-  // it's SPAM
-  die();
-}
+require_once('validators.php');
 
 // read and sanitise form questions
 $form_name = safify($_POST['name']);
@@ -73,14 +69,5 @@ $successPage = '../pages/intensiveThanks.html';
 // now mail this!
 require_once('mailThis.php');
 
-
-// sanitise user input - don't trust them!
-function safify($var) {
-  $var = trim($var);
-  $var = strip_tags($var);
-  $var = stripslashes($var);
-  $var = htmlentities($var);
-  return $var;
-}
 
 ?>
