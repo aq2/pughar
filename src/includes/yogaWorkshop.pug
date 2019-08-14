@@ -19,7 +19,7 @@ mixin yogaWorkshop(info)
       &pound;10 non-refundable deposit for client cancellation<br>
       Full refund for instructor cancellation
 
-    form(method='post' action='./../../php/processYogaWorkshopForm.php')
+    form(method='post' action='./../../php/processYogaWorkshopForm.php' onsubmit='return validate(this)')
       p.
         To book and pay for a place on this workshop, please fill out the following form, and I'll get back to you as soon as I can.
       fieldset
@@ -44,3 +44,5 @@ mixin yogaWorkshop(info)
           input(name='subject' type='hidden' value=info.ID)
           input(type='submit' value='Continue to PayPal' name='submit')
 
+
+  script(src='../../js/validators.js')
