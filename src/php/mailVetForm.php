@@ -1,7 +1,5 @@
 <?php
 
-// honeypot?
-
 $emailBody = $_POST['punterMsg'];
 $emailSubject = 'Intensive Training Course';
 $successPage = '../pages/contactThanks.html';

@@ -25,6 +25,7 @@ $success = mail($emailTo, $emailSubject, $emailBody, $headers);
 // redirect to success page, hopefully
 if ($success) {
   print "<meta http-equiv='refresh' content='0;URL=" . $successPage . "'>";
+  /* print "<meta http-equiv='refresh' content='0;URL=$successPage'>"; */
 } else {
   print "<meta http-equiv='refresh' content='0;URL=" . $failPage . "'>";
 }

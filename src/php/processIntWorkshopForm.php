@@ -21,20 +21,20 @@ $form_mapRef = safify($_POST['iframeSrc']);
 
 // prepare email body text
 $emailBody = '<h1>Intensive workshop application</h1>'
-           . '<h2>Name: ' . $form_name . '</h2>'
-      . '<h2>Gender: ' . $form_gender . '</h2>'
-      . '<h2>Age: ' . $form_age . '</h2>'
-      . '<h2>Phone: ' . $form_tel . '</h2>'
-      . '<h2>Email: ' . $form_email . '</h2>'
-      . '<h2>Health Conditions: ' . $form_health . '</h2>'
-      . '<h2>Medications: ' . $form_meds . '</h2>'
-      . '<h2>Workshop already done: ' . $form_workshops . '</h2>'
-      . '<h2>Qualifications: ' . $form_quals . '</h2>'
-      . "<h2>Workshop applied for: $form_place, $form_date </h2>"
-      . '<br><br>'
-      . "<h3>Hi Saghar, little message from angelo...</h3>"
-      . "<h3>This email means that someone has applied for intensive workshop training.</h3>"
-      . "<h3>You now have to approve or reject them.</h3>";
+           . "<h2>Name: $form_name </h2>"
+           . "<h2>Gender: $form_gender </h2>"
+           . "<h2>Age: $form_age </h2>"
+           . "<h2>Phone: $form_tel </h2>"
+           . "<h2>Email: $form_email </h2>"
+           . "<h2>Health Conditions:  $form_health </h2>"
+           . "<h2>Medications:  $form_meds </h2>"
+           . "<h2>Workshop already done: $form_workshops </h2>"
+           . "<h2>Qualifications: $form_quals </h2>"
+           . "<h2>Workshop applied for: $form_place, $form_date </h2>"
+           . '<br><br>'
+           . '<h3>Hi Saghar, little message from angelo...</h3>'
+           . '<h3>This email means that someone has applied for intensive workshop training.</h3>'
+           . '<h3>You now have to approve or reject them.</h3>';
 
 
 // now build up info to appear in link to approve

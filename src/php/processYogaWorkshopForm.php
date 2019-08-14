@@ -12,16 +12,16 @@ $form_subject = safify($_POST['subject']);
 
 // prepare email body text
 $emailBody = '<h1>Yoga workshop reply</h1>'
-            . "<h2>Name: $form_name </h2>"
-            . "<h2>Phone: $form_tel </h2>"
-              . "<h2>Email: $form_email </h2>"
-            . "<h2>Workshop: $form_subject </h2>"
-          . "<h2>Tickets: $form_tickets </h2>"
-          . "<br><br>"
-          . "<p>Hi Saghar, little message from angelo...</p>"
-          . "<p>This email only means that someone has filled in the yoga workshop form.</p>"
-            . "<p>It DOES NOT mean that they have paid.</p>"
-          . "<p>PayPal will send you another email when they have paid.</p>";
+           . "<h2>Name: $form_name </h2>"
+           . "<h2>Phone: $form_tel </h2>"
+           . "<h2>Email: $form_email </h2>"
+           . "<h2>Workshop: $form_subject </h2>"
+           . "<h2>Tickets: $form_tickets </h2>"
+           . '<br><br>'
+           . '<p>Hi Saghar, little message from angelo...</p>'
+           . '<p>This email only means that someone has filled in the yoga workshop form.</p>'
+           . '<p>It DOES NOT mean that they have paid.</p>'
+           . '<p>PayPal will send you another email when they have paid.</p>';
 
 $emailSubject = form_subject;
 $successPage = '../pages/contactThanks.html';

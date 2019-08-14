@@ -20,5 +20,4 @@ function safify($var) {
   return $var;
 }
 
-
 ?>
