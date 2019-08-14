@@ -8,11 +8,11 @@ h3.accordion_heading.last_acc(rel='contact') Contact
       fieldset
         br
         div
-          input.name(type='text' name='name' placeholder='Your name' autocomplete='off' required)
+          input.name(type='text' name='name' placeholder='Your name' autocomplete='off' required autofocus)
         div
-          input.email(type='email' name='email' placeholder='Your email address' autocomplete='off' required)
+          input.email(type='email' name='email' placeholder='Your email address' required)
         div
-          textarea.message(name='message' rows=3 cols=30 placeholder='write me a message...' required)
+          textarea.message(name='message' rows=3 cols=30 placeholder='write me a message...' autocomplete='off' required)
 
         //- css hidden honeypot - only automated spammers will see this and attempt to fill
         div
@@ -26,22 +26,9 @@ h3.accordion_heading.last_acc(rel='contact') Contact
     img(src='images/lotus.jpg')
     p mobile: 07974 470 610
     p Neal's Yard, Exeter: 01392 438127
-    p Neal's Yard, Totnes: 01803 868054
     p.email
       a(href='mailto:saghar_amozgar@hotmail.com') saghar_amozgar@hotmail.com
 
+
   script(src='../js/validators.js')
 
-  script.
-    function validate(form) {
-      let failMessage = validateEmail(form.email.value)
-                      // + check4links(form.message.value)
-
-      if (failMessage == '') {
-        return true
-      }
-      alert(failMessage)
-      return false
-
-
-    }

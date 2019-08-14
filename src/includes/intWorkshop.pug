@@ -10,16 +10,17 @@ mixin intWorkshop(info)
   #info
     h2 Ayurvedic Yoga Massage Intensive Training
     h4= info.date
+    p 9am - 4pm, with an hour lunch break
     h4= info.place
-    p= info.address
     iframe.map(src=info.iframeSrc frameborder=0)
+    p= info.address
     p &pound;350 for individuals, &pound;90 deposit requested at least two weeks before start date
     p Full refund for instructor cancellation
     p.
       It is important to have attended a workshop session before taking the training course.<br>
       Alternatively, you can phone or <a href="mailto:saghar@ayurvedicyogamassage.org.uk">email Saghar</a> to arrange a short interview.
 
-    form(method='post' action='./../../php/processIntWorkshopForm.php')
+    form(method='post' action='./../../php/processIntWorkshopForm.php' onsubmit='return validate(this)')
       p To apply for a place on this training course, please fill out the following form, and I'll get back to you as soon as I can.
 
       p I care about your privacy, and I will not share any of your information with anybody.
@@ -27,7 +28,7 @@ mixin intWorkshop(info)
       fieldset
         p Your details
         div
-          input.name(type='text' name='name' placeholder='Your name' autocomplete='off' required)
+          input.name(type='text' name='name' placeholder='Your name' autocomplete='off' required autofocus)
         div
           select(name='gender' required)
             option(value='female') female
@@ -38,23 +39,23 @@ mixin intWorkshop(info)
         div
           input.tel(type='tel' name='tel' placeholder='Your phone number' autocomplete='off' required)
         div
-          input.email(type='email' name='email' placeholder='Your email address' autocomplete='off' required)
+          input.email(type='email' name='email' placeholder='Your email address' required)
         div
           span.question Any relevant health conditions?
-          input#health-box(type='checkbox')
-          textarea#health(name='health' rows=3 cols=30 placeholder='Please provide brief details...')
+          input#health-box(type='checkbox' autocomplete='off')
+          textarea#health(name='health' rows=3 cols=30 placeholder='Please provide brief details...' autocomplete='off')
         div
           span.question Are you taking any medications?
-          input#meds-box(type='checkbox')
-          textarea#meds(name='medic' rows=3 cols=30 placeholder='Please provide relevant details...')
+          input#meds-box(type='checkbox' autocomplete='off')
+          textarea#meds(name='medic' rows=3 cols=30 placeholder='Please provide relevant details...' autocomplete='off')
         div
           span.question Have you taken any of our workshops?
-          input#wksh-box(type='checkbox')
-          textarea#workshop(name='wksh' rows=3 cols=30 placeholder='Please provide brief details of location and approximate date...')
+          input#wksh-box(type='checkbox' autocomplete='off')
+          textarea#workshop(name='wksh' rows=3 cols=30 placeholder='Please provide brief details of location and approximate date...' autocomplete='off')
         div
           span.question Do you have any other training course qualification?
-          input#quals-box(type='checkbox')
-          textarea#quals(name='quals' rows=3 cols=30 placeholder='Please provide brief details')
+          input#quals-box(type='checkbox' autocomplete='off')
+          textarea#quals(name='quals' rows=3 cols=30 placeholder='Please provide brief details' autocomplete='off')
 
         //- css hidden honeypot - only automated spammers will see this and attempt to fill
         div
@@ -70,28 +71,22 @@ mixin intWorkshop(info)
 
           input(type='submit' value='Apply for course' name='button')
 
-  // script(src='./../../js/jq-validate.min.js')
+
+  script(src='../js/validators.js')
+
   script.
-    $(document).ready(function() {
-          $("#health-box").click(function() {
-            $("#health").fadeToggle(400)
-          })
-          $("#meds-box").click(function() {
-            $("#meds").fadeToggle(400);
-          })
-          $("#quals-box").click(function() {
-            $("#quals").fadeToggle(400);
-          })
-          $("#wksh-box").click(function() {
-            $("#workshop").fadeToggle(400);
-          })
-        })
-
-        // $.validator.messages.required = "We really do need this info!";
-        // $("#wksh").validate({
-          // submitHandler: function(form) {
-            // form.submit();
-          // }
-    // });
-
+    $(document).ready(() => {
+      $('#health-box').click(() => {
+        $('#health').fadeToggle(400)
+      })
+      $('#meds-box').click(() => {
+        $('#meds').fadeToggle(400)
+      })
+      $('#quals-box').click(() => {
+        $('#quals').fadeToggle(400)
+      })
+      $('#wksh-box').click(() => {
+        $('#workshop').fadeToggle(400)
+      })
+    })
 

@@ -18,17 +18,17 @@ mixin aymWorkshop(info)
       &pound;10 non-refundable deposit for client cancellation<br>
       Full refund for instructor cancellation
 
-    form(method='post' action='./../../php/processAymWorkshopForm.php')
+    form(method='post' action='./../../php/processAymWorkshopForm.php' onsubmit='return validate(this)')
       p.
         To book and pay for a place on this workshop, please fill out the following form, and I'll get back to you as soon as I can.
       fieldset
         p Your details
         div
-          input.name(type='text' name='name' placeholder='Your name' autocomplete='off' required)
+          input.name(type='text' name='name' placeholder='Your name' autocomplete='off' required autofocus)
         div
           input.tel(type='tel' name='tel' placeholder='Your phone number' autocomplete='off' required)
         div
-          input.email(type='email' name='email' placeholder='Your email address' autocomplete='off' required)
+          input.email(type='email' name='email' placeholder='Your email address' required)
         div
           select(name='tickets' required)
             option(value='deposit') Deposit: &nbsp;&pound;10
@@ -45,5 +45,6 @@ mixin aymWorkshop(info)
           input(name='subject' type='hidden' value=info.ID)
           input(type='submit' value='Continue to PayPal' name='submit')
 
-  // script(src='./../../js/jq-validate.min.js')
+
+  script(src='../js/validators.js')
 

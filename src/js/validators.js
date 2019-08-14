@@ -1,5 +1,12 @@
 //- validates form field entries before sending to php
 
+function validate(form) {
+      let failMessage = validateEmail(form.email.value)
+                      // + check4links(form.message.value)
+
+      return check4fail(failMessage)
+    }
+
 
 function validateName(field) {
   return (field == 'me') ? 'Please enter a name \n' : ''
@@ -27,5 +34,15 @@ function check4links(field) {
       return 'no web links allowed! \n'
   } else {
     return ''
+  }
+}
+
+
+function check4fail(failMessage) {
+  if (failMessage == '') {
+    return true
+  } else {
+    alert(failMessage)
+    return false
   }
 }
