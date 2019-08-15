@@ -10,13 +10,14 @@ mixin aymWorkshop(info)
   #info
     h2 Ayurvedic Yoga Massage Workshop
     h4= info.date
+      p= info.time
     h4= info.place
-    p= info.address
+      p= info.address
     iframe.map(src=info.iframeSrc frameborder=0)
-    p &pound;30 for individuals, &pound;50 for a couple (any partner or friend)
-    p.
-      &pound;10 non-refundable deposit for client cancellation<br>
-      Full refund for instructor cancellation
+    h4 &pound;30 for individuals, &pound;50 for a couple (any partner or friend)
+      p.
+        &pound;10 non-refundable deposit for client cancellation<br>
+        Full refund for instructor cancellation
 
     form(method='post' action='./../../php/processAymWorkshopForm.php' onsubmit='return validate(this)')
       p.

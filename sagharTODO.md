@@ -1,14 +1,22 @@
 # todo's for saghar's website
 
-  * [ ] form css icons
+  * [ ] new dates
+  * [ ] add times to workshops!
+
+  * [ ] detect dev server for emails →only send to me, not saghar for testing
+
+  * [ ] h1 media query positioning and size
+
   * [ ] approve.php
     * [ ] how to unhard-code?
       * [ ] toggle a line like emails for dev/live
   * [ ] pay4training
     * [ ] nov.pug, mar.pug →use mixin
-  * [ ] honeypot + check for links in message = SPAM
-  * [ ] paypal buttons for training?
 
+  * [✓] form placeholder colors
+  * [✓] paypal buttons for training?
+  * [✓] honeypot + check for links in message = SPAM
+  * [✓] form css icons
 
 
   * [✓] paypal buttons - share em!

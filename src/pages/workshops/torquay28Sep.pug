@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    // set cssFile var for the mixin in the head include
+    - const cssFile = './../../css/main.min.css'
+    include ./../../includes/head.pug
+
+    // doesn't actually include mixin in html, but makes it available
+    include ./../../includes/aymWorkshop.pug
+
+
+  body
+    #container
+      // set workshop data for workshop mixin
+      -
+        const workshopData = {
+            place: 'Yoga Torquay',
+            address: 'Park Lane, Torquay',
+            date: 'Saturday, 28th September 2019',
+            time: '1 - 4pm',
+            iframeSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5079.983127521259!2d-3.5257062866980977!3d50.45988178253823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486d0f0f2a8cf1ff%3A0xb272acb799334d88!2sYoga+Torquay!5e0!3m2!1sen!2suk!4v1565880541378!5m2!1sen!2suk',
+            ID: 'Torquay workshop 28th September'
+        }
+
+      // call and include mixin in html
+      +aymWorkshop(workshopData)
+
