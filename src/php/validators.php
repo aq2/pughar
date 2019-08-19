@@ -31,7 +31,7 @@ function checkAge($age) {
 
 
 function validEmail($email) {
-  return (filter_var($email, FILTER_VALIDATE_EMAIL)) ? true : false
+  return (filter_var($email, FILTER_VALIDATE_EMAIL)) ? true : false;
 }
 
 ?>
