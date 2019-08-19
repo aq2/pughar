@@ -32,3 +32,13 @@ h3.accordion_heading.last_acc(rel='contact') Contact
 
   script(src='../js/validators.js')
 
+  script.
+    function validate(form) {
+      let failMessage = validateName(form.name.value)
+                      + validateEmail(form.email.value)
+                      + validateMessage(form.message.value)
+                      + check4links(form.message.value)
+
+      return check4fail(failMessage)
+    }
+

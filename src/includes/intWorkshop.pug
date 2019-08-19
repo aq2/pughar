@@ -90,3 +90,11 @@ mixin intWorkshop(info)
       })
     })
 
+    function validate(form) {
+      let failMessage = validateName(form.name.value)
+                      + validateAge(form.age.value)
+                      + validatePhone(form.tel.value)
+                      + validateEmail(form.email.value)
+
+      return check4fail(failMessage)
+    }

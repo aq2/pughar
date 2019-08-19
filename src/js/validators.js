@@ -1,41 +1,41 @@
 //- validates form field entries before sending to php
 
-function validate(form) {
-      let failMessage = validateEmail(form.email.value)
-                      // + check4links(form.message.value)
-
-      return check4fail(failMessage)
-    }
-
-
-function validateName(field) {
-  return (field == 'me') ? 'Please enter a name \n' : ''
+function validateName(name) {
+  return (name == '') ? 'Please enter a name \n' : ''
 }
 
+function validateMessage(message) {
+  // test for spaces only
+  return (/^\s*$/.test(message)) ? 'Please enter a message \n' : ''
+}
 
-function validateEmail(field) {
+function validateEmail(email) {
   if (
-    (field.indexOf('.') > 0)
-    && (field.indexOf('@') > 0)
-    || /[^a-zA-Z0-9.@_-]/.test(field)
+    (email.indexOf('.') > 0)
+    && (email.indexOf('@') > 0)
+    || /[^a-zA-Z0-9.@_-]/.test(email)
   ) {
     return ''
-  } else {
-    return 'Please enter a valid email address \n'
   }
+  return 'Please enter a valid email address \n'
 }
 
-
-function check4links(field) {
+function check4links(message) {
   if (
-    (field.includes('http'))
-    || (field.includes('www'))
+    (message.includes('http'))
+    || (message.includes('www'))
   ) {
       return 'no web links allowed! \n'
-  } else {
-    return ''
   }
+  return ''
 }
+
+function validatePhone(phone) {
+  // at least one number, and spaces ok
+  return (/^(?=.*\d)[\d ]+$/.test(phone)) ? '' : 'Please enter a valid phone number \n'
+}
+
+
 
 
 function check4fail(failMessage) {

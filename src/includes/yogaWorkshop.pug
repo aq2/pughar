@@ -46,3 +46,12 @@ mixin yogaWorkshop(info)
 
 
   script(src='../../js/validators.js')
+
+  script.
+    function validate(form) {
+      let failMessage = validateName(form.name.value)
+                      + validatePhone(form.tel.value)
+                      + validateEmail(form.email.value)
+
+      return check4fail(failMessage)
+    }

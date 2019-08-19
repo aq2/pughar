@@ -20,4 +20,17 @@ function safify($var) {
   return $var;
 }
 
+
+function checkAge($age) {
+  if (($age > 10) && ($age < 100)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+function validEmail($email) {
+  return (filter_var($email, FILTER_VALIDATE_EMAIL)) ? true : false
+
 ?>

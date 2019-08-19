@@ -1,7 +1,8 @@
 <?php
+// javascript validation should have been done before reaching this file
 
+// load php validation functions to double-check for hackery
 require_once('validators.php');
-
 
 // read and sanitise form questions
 $formName = safify($_POST['name']);
@@ -9,6 +10,12 @@ $formTel = safify($_POST['tel']);
 $formEmail = safify($_POST['email']);
 $formTickets = safify($_POST['tickets']);
 $formSubject = safify($_POST['subject']);
+
+// no fields can be empty, email address must be valid
+// check that tickets are ok??
+// honeypot?
+// overkill?
+// lazy man decision: what till it's spammed...
 
 
 // prepare email body text
