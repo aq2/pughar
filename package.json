@@ -18,7 +18,7 @@
   "homepage": "https://github.com/aq2/pughar#readme",
   "devDependencies": {
     "browser-sync": "^2.26.7",
-    "del": "^5.0.0",
+    "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-notify": "^3.2.0",
     "gulp-plumber": "^1.2.1",
